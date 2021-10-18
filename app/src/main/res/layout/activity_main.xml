@@ -6,14 +6,45 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textAlignment="center"
+        android:textStyle="italic"
+        android:textSize="@dimen/title_size"></TextView>
 
 
     <ListView
-        android:id="@+id/list"
+        android:id="@+id/lv_notes_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        ></ListView>
+        android:layout_below="@id/buttons_row"></ListView>
 
+    <LinearLayout
+        android:id="@+id/buttons_row"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_marginTop="@dimen/margin_5"
+        android:layout_marginBottom="@dimen/margin_5"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_new_file"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/margin_5"
+            android:layout_marginRight="@dimen/margin_5"
+            android:layout_weight="1"
+            android:text="@string/new_button_text"
+            android:textSize="@dimen/text_size"></Button>
+
+
+    </LinearLayout>
 
 
 </RelativeLayout>
