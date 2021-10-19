@@ -20,7 +20,13 @@ class DataManager{
     private String body;
     private int save;
 
-
+    /**
+     * Constructor till DataManager
+     * @param context contextet som används för att får tillgång till filer
+     * @param title titel på note som används som fil namn
+     * @param body texten som sparas in i filen
+     * @param save 0 eller 1 identifierar om filen ska sparas eller radera
+     */
     public DataManager(AppCompatActivity context, String title, String body, int save) {
 
         this.CONTEXT = context;
@@ -32,6 +38,10 @@ class DataManager{
 
     }
 
+    /**
+     * kollar om man vill radera eller spara en fil och anropar rätt metod
+     * @param obj
+     */
     private void checkErase(DataManager obj){
 
         if(obj.save == 0){
@@ -44,17 +54,22 @@ class DataManager{
         }
     }
 
+    /**
+     * raderar file från minnen
+     * @param obj
+     */
     private void eraseTextFile(DataManager obj) {
 
         File folder = getFolder(obj);
         String s = obj.title+".txt";
         File file = new File(folder, s);
         file.delete();
-
-
     }
 
-
+    /**
+     * sparar filen i minnnen
+     * @param obj
+     */
     public void saveToTextFile(DataManager obj) {
 
        File folder = getFolder(obj);
@@ -72,6 +87,11 @@ class DataManager{
 
     }
 
+    /**
+     * hämtar mappen där filerna ligger
+     * @param obj objektet vi manipulerar, hän används bara CONTEXT variabel
+     * @return
+     */
     public File getFolder(DataManager obj){
 
         File folder = new File(obj.CONTEXT.getFilesDir(), "notes");
@@ -80,6 +100,4 @@ class DataManager{
         }
         return folder;
     }
-
-
 }

@@ -69,6 +69,9 @@ public class Edit extends AppCompatActivity {
         });
     }
 
+    /**
+     * hämtar texten från edit text fält och kollar om de är tomma, i så fall visas ett felmeddellande upp
+     */
     public void getInputText() {
 
         titleText = title.getText().toString();
@@ -88,11 +91,18 @@ public class Edit extends AppCompatActivity {
         fieldsNotEmpty = true;
     }
 
+    /**
+     * skapar Intent objekt som går tillbaka till Main activity
+     * @return Intent
+     */
     public Intent backToMain() {
         Intent goToMain = new Intent(Edit.this, MainActivity.class);
         return goToMain;
     }
 
+    /**
+     * hämtar datan om man laddar ett fil som redan existerar
+     */
     public void onNoteLoad() {
 
         String t = getIntent().getStringExtra("title");
@@ -103,6 +113,10 @@ public class Edit extends AppCompatActivity {
 
     }
 
+    /**
+     * visar felmeddelandet om nån fält är tom
+     * @param id bestämmer vart ska felet visas upp
+     */
     public void showError(int id) {
 
         switch (id) {
@@ -120,6 +134,10 @@ public class Edit extends AppCompatActivity {
         }
     }
 
+    /**
+     * skapar Toast meddelande när anropad
+     * @param id identifiera vilken toast ska visas upp.
+     */
     public void toaster(int id) {
 
         switch (id) {

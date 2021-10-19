@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         if (!folder.exists()) {
             folder.mkdir();
         }
-
+//här fylls arrayen upp och kopplas sen till ListView
         fillArray(folder);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, notesMemory);
         notesList.setAdapter(adapter);
@@ -86,6 +86,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * fyller en Array List med alla txt filers namn för att visa de till användare
+     * @param folder positionen av mappen med alla filer
+     */
     public void fillArray(File folder) {
 
         File[] folderContent = folder.listFiles();
@@ -102,6 +106,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * skapar Toast meddelande när anropad
+     * @param id identifiera vilken toast ska visas upp.
+     */
     public void toaster(int id) {
 
         switch (id) {
