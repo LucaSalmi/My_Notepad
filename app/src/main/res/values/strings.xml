@@ -9,4 +9,6 @@
     <string name="saved">" saved"</string>
     <string name="sure">Are you sure?</string>
     <string name="deleted">" deleted"</string>
+    <string name="error_text">The field cannot be empty</string>
+    <string name="extension_txt">.txt</string>
 </resources>

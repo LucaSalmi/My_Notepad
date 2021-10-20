@@ -16,18 +16,26 @@
         android:hint="@string/edit_title_hint"
         android:inputType="text"
         android:maxLength="20"
+        android:layout_marginLeft="@dimen/margin_5"
+        android:layout_marginRight="@dimen/margin_5"
         android:paddingBottom="@dimen/margin_5"
         android:textAlignment="center"
+        android:fontFamily="@font/annie_use_your_telescope"
+        android:textStyle="bold"
         android:textSize="@dimen/title_size"></EditText>
 
     <EditText
         android:id="@+id/et_note_body"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/margin_5"
+        android:layout_marginRight="@dimen/margin_5"
         android:layout_below="@id/et_note_title"
         android:background="@drawable/background_dimmer"
         android:gravity="top|start"
         android:textSize="@dimen/text_size"
+        android:fontFamily="@font/annie_use_your_telescope"
+        android:textStyle="bold"
         android:hint="@string/edit_body_hint"
         android:inputType="textMultiLine"></EditText>
 

@@ -20,6 +20,8 @@ class DataManager{
     private String body;
     private boolean save;
 
+    String extension = ".txt";
+
     /**
      * Constructor till DataManager
      * @param context contextet som används för att får tillgång till filer
@@ -76,11 +78,11 @@ class DataManager{
        int n = 0;
 
         try {
-            File note = new File(folder, obj.title + ".txt");
+            File note = new File(folder, obj.title + extension);
 //loopen kollar om det finns ett fil med samma namn och, i så fall, ändrar namnet till title + en siffra.
             while(note.exists()){
                 n++;
-                note = new File(folder, obj.title + n + ".txt");
+                note = new File(folder, obj.title + n + extension);
             }
 
             PrintWriter writer = new PrintWriter(note);

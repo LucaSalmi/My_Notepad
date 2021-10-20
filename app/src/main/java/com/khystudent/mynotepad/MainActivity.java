@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void getFileData(File folder){
 
-        File readFile = new File(folder, title + ".txt");
+        File readFile = new File(folder, title + getString(R.string.extension_txt));
         try {
             Scanner sc = new Scanner(readFile);
             body = sc.nextLine();

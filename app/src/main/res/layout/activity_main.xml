@@ -11,12 +11,12 @@
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/background_dimmer"
+        android:fontFamily="@font/annie_use_your_telescope"
         android:text="@string/app_name"
         android:textAlignment="center"
-        android:fontFamily="@font/annie_use_your_telescope"
-        android:textStyle="bold"
-        android:background="@drawable/background_dimmer"
-        android:textSize="@dimen/title_size"></TextView>
+        android:textSize="@dimen/title_size"
+        android:textStyle="bold"></TextView>
 
 
     <ListView

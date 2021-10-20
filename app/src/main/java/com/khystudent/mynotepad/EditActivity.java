@@ -35,11 +35,6 @@ public class EditActivity extends AppCompatActivity {
         save = findViewById(R.id.btn_save_note);
         erase = findViewById(R.id.btn_erase_note);
 
-        String toastNote = getString(R.string.note);
-        String toastDelete = getString(R.string.deleted);
-        String toastSave = getString(R.string.saved);
-        String toastSure = getString(R.string.sure);
-
         onNoteLoad();
 
         save.setOnClickListener(new View.OnClickListener() {
@@ -140,14 +135,14 @@ public class EditActivity extends AppCompatActivity {
         switch (id) {
 
             case 0:
-                title.setError("Field cannot be empty");
-                body.setError("Field cannot be empty");
+                title.setError(getString(R.string.error_text));
+                body.setError(getString(R.string.error_text));
                 break;
             case 1:
-                title.setError("Field cannot be empty");
+                title.setError(getString(R.string.error_text));
                 break;
             case 2:
-                body.setError("Field cannot be empty");
+                body.setError(getString(R.string.error_text));
                 break;
         }
     }
