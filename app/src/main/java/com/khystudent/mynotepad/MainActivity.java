@@ -129,7 +129,9 @@ public class MainActivity extends AppCompatActivity {
         switch (id) {
 
             case 0:
-                Toast.makeText(MainActivity.this, "Note " + title + " loaded", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this,
+                        getString(R.string.toast_note) + title + getString(R.string.toast_loaded),
+                        Toast.LENGTH_SHORT).show();
                 break;
         }
     }
