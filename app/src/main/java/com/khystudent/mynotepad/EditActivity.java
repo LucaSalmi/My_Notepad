@@ -157,17 +157,17 @@ public class EditActivity extends AppCompatActivity {
 
             case 0:
                 Toast.makeText(EditActivity.this,
-                        getString(R.string.note) + titleText + getString(R.string.saved),
+                        getString(R.string.toast_note) + titleText + getString(R.string.toast_saved),
                         Toast.LENGTH_SHORT).show();
                 break;
             case 1:
                 Toast.makeText(EditActivity.this,
-                        getString(R.string.sure),
+                        getString(R.string.toast_sure),
                         Toast.LENGTH_SHORT).show();
                 break;
             case 2:
                 Toast.makeText(EditActivity.this,
-                        getString(R.string.note) + titleText + getString(R.string.deleted),
+                        getString(R.string.toast_note) + titleText + getString(R.string.toast_deleted),
                         Toast.LENGTH_SHORT).show();
                 break;
         }

@@ -5,10 +5,11 @@
     <string name="save_button_text">Save note</string>
     <string name="edit_title_hint">Title</string>
     <string name="edit_body_hint">Your Note</string>
-    <string name="note">"Note "</string>
-    <string name="saved">" saved"</string>
-    <string name="sure">Are you sure?</string>
-    <string name="deleted">" deleted"</string>
+    <string name="toast_note">"Note "</string>
+    <string name="toast_saved">" saved"</string>
+    <string name="toast_sure">Are you sure?</string>
+    <string name="toast_deleted">" deleted"</string>
     <string name="error_text">The field cannot be empty</string>
     <string name="extension_txt">.txt</string>
+    <string name="toast_loaded">" loaded"</string>
 </resources>
