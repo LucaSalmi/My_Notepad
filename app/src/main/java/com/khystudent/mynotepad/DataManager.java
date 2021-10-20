@@ -77,7 +77,7 @@ class DataManager{
 
         try {
             File note = new File(folder, obj.title + ".txt");
-
+//loopen kollar om det finns ett fil med samma namn och, i så fall, ändrar namnet till title + en siffra.
             while(note.exists()){
                 n++;
                 note = new File(folder, obj.title + n + ".txt");

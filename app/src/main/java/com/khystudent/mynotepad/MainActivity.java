@@ -1,13 +1,12 @@
 package com.khystudent.mynotepad;
 
-import static android.content.ContentValues.TAG;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -16,7 +15,6 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -31,8 +29,6 @@ public class MainActivity extends AppCompatActivity {
     String title;
     String body;
 
-    int id;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
         notesList = findViewById(R.id.lv_notes_list);
         newFile = findViewById(R.id.btn_new_file);
 
+        Animation bounce = AnimationUtils.loadAnimation(MainActivity.this, R.anim.bounce);
+
         File folder = new File(this.getFilesDir(), "notes");
         if (!folder.exists()) {
             folder.mkdir();
@@ -49,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
 //här fylls arrayen upp och kopplas sen till ListView
         fillArray(folder);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, notesMemory);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.my_list_view_item, notesMemory);
         notesList.setAdapter(adapter);
 
         notesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -67,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         newFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                newFile.startAnimation(bounce);
 
                 startActivity(createIntent(0));
             }
@@ -88,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
     public Intent createIntent(int id){
 
-        Intent goToEdit = new Intent(MainActivity.this, Edit.class);
+        Intent goToEdit = new Intent(MainActivity.this, EditActivity.class);
 
         switch (id){
             case 0:

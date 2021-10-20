@@ -4,52 +4,57 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Edit">
+    android:background="@drawable/notepad_background"
+    tools:context=".EditActivity">
 
     <EditText
         android:id="@+id/et_note_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
+        android:background="@drawable/background_dimmer"
         android:hint="@string/edit_title_hint"
         android:inputType="text"
         android:maxLength="20"
-        android:textAlignment="center"></EditText>
+        android:paddingBottom="@dimen/margin_5"
+        android:textAlignment="center"
+        android:textSize="@dimen/title_size"></EditText>
 
     <EditText
         android:id="@+id/et_note_body"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:hint="@string/edit_body_hint"
-        android:gravity="top|start"
+        android:layout_height="match_parent"
         android:layout_below="@id/et_note_title"
-        ></EditText>
+        android:background="@drawable/background_dimmer"
+        android:gravity="top|start"
+        android:textSize="@dimen/text_size"
+        android:hint="@string/edit_body_hint"
+        android:inputType="textMultiLine"></EditText>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/background_dimmer"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/btn_save_note"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/save_button_text"
-            android:layout_weight="1"
+            android:layout_marginLeft="@dimen/margin_5"
             android:layout_marginRight="@dimen/margin_5"
-            android:layout_marginLeft="@dimen/margin_5"></Button>
+            android:layout_weight="1"
+            android:text="@string/save_button_text"></Button>
 
         <Button
             android:id="@+id/btn_erase_note"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/erase_button_text"
-            android:layout_weight="1"
+            android:layout_marginLeft="@dimen/margin_5"
             android:layout_marginRight="@dimen/margin_5"
-            android:layout_marginLeft="@dimen/margin_5"></Button>
-
+            android:layout_weight="1"
+            android:text="@string/erase_button_text"></Button>
 
 
     </LinearLayout>

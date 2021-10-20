@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class Edit extends AppCompatActivity {
+public class EditActivity extends AppCompatActivity {
 
     EditText title;
     EditText body;
@@ -20,6 +20,7 @@ public class Edit extends AppCompatActivity {
 
     String titleText;
     String bodyText;
+
 
     boolean confirmDelete = false;
     boolean fieldsNotEmpty = false;
@@ -33,6 +34,11 @@ public class Edit extends AppCompatActivity {
         body = findViewById(R.id.et_note_body);
         save = findViewById(R.id.btn_save_note);
         erase = findViewById(R.id.btn_erase_note);
+
+        String toastNote = getString(R.string.note);
+        String toastDelete = getString(R.string.deleted);
+        String toastSave = getString(R.string.saved);
+        String toastSure = getString(R.string.sure);
 
         onNoteLoad();
 
@@ -80,7 +86,7 @@ public class Edit extends AppCompatActivity {
     public void sendToSave(){
 
         if (fieldsNotEmpty) {
-            DataManager newNote = new DataManager(Edit.this, titleText, bodyText, true);
+            DataManager newNote = new DataManager(EditActivity.this, titleText, bodyText, true);
             toaster(0);
             startActivity(backToMain());
         }
@@ -95,7 +101,7 @@ public class Edit extends AppCompatActivity {
         }else{
 
             getInputText();
-            DataManager deleteNote = new DataManager(Edit.this, titleText, bodyText, false);
+            DataManager deleteNote = new DataManager(EditActivity.this, titleText, bodyText, false);
             toaster(2);
             confirmDelete = false;
             startActivity(backToMain());
@@ -109,7 +115,7 @@ public class Edit extends AppCompatActivity {
      * @return Intent
      */
     public Intent backToMain() {
-        Intent goToMain = new Intent(Edit.this, MainActivity.class);
+        Intent goToMain = new Intent(EditActivity.this, MainActivity.class);
         return goToMain;
     }
 
@@ -155,13 +161,19 @@ public class Edit extends AppCompatActivity {
         switch (id) {
 
             case 0:
-                Toast.makeText(Edit.this, "Note " + titleText + " saved", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditActivity.this,
+                        getString(R.string.note) + titleText + getString(R.string.saved),
+                        Toast.LENGTH_SHORT).show();
                 break;
             case 1:
-                Toast.makeText(Edit.this, "Are you sure?", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditActivity.this,
+                        getString(R.string.sure),
+                        Toast.LENGTH_SHORT).show();
                 break;
             case 2:
-                Toast.makeText(Edit.this, "Note " + titleText + " deleted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditActivity.this,
+                        getString(R.string.note) + titleText + getString(R.string.deleted),
+                        Toast.LENGTH_SHORT).show();
                 break;
         }
     }
