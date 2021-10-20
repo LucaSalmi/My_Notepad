@@ -16,6 +16,7 @@ import android.widget.Toast;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
@@ -118,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+        Collections.reverse(notesMemory);
     }
 
     /**
