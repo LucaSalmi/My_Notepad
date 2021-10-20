@@ -41,12 +41,8 @@ public class Edit extends AppCompatActivity {
             public void onClick(View view) {
 
                 getInputText();
+                sendToSave();
 
-                if (fieldsNotEmpty) {
-                    DataManager newNote = new DataManager(Edit.this, titleText, bodyText, 0);
-                    toaster(0);
-                    startActivity(backToMain());
-                }
             }
         });
 
@@ -54,17 +50,7 @@ public class Edit extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (confirmDelete == false) {
-                    toaster(1);
-                    confirmDelete = true;
-                    return;
-                }
-
-                getInputText();
-                DataManager newNote = new DataManager(Edit.this, titleText, bodyText, 1);
-                toaster(2);
-                confirmDelete = false;
-                startActivity(backToMain());
+                eraseButtonSecurity();
             }
         });
     }
@@ -91,6 +77,33 @@ public class Edit extends AppCompatActivity {
         fieldsNotEmpty = true;
     }
 
+    public void sendToSave(){
+
+        if (fieldsNotEmpty) {
+            DataManager newNote = new DataManager(Edit.this, titleText, bodyText, true);
+            toaster(0);
+            startActivity(backToMain());
+        }
+    }
+
+    public void eraseButtonSecurity(){
+
+        if (!confirmDelete) {
+            toaster(1);
+            confirmDelete = true;
+
+        }else{
+
+            getInputText();
+            DataManager deleteNote = new DataManager(Edit.this, titleText, bodyText, false);
+            toaster(2);
+            confirmDelete = false;
+            startActivity(backToMain());
+        }
+
+
+    }
+
     /**
      * skapar Intent objekt som går tillbaka till Main activity
      * @return Intent
@@ -110,7 +123,6 @@ public class Edit extends AppCompatActivity {
 
         title.setText(t);
         body.setText(b);
-
     }
 
     /**

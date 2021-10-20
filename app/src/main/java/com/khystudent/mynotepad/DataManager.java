@@ -18,7 +18,7 @@ class DataManager{
     private final AppCompatActivity CONTEXT;
     private String title;
     private String body;
-    private int save;
+    private boolean save;
 
     /**
      * Constructor till DataManager
@@ -27,7 +27,7 @@ class DataManager{
      * @param body texten som sparas in i filen
      * @param save 0 eller 1 identifierar om filen ska sparas eller radera
      */
-    public DataManager(AppCompatActivity context, String title, String body, int save) {
+    public DataManager(AppCompatActivity context, String title, String body, boolean save) {
 
         this.CONTEXT = context;
         this.title = title;
@@ -44,11 +44,11 @@ class DataManager{
      */
     private void checkErase(DataManager obj){
 
-        if(obj.save == 0){
+        if(obj.save){
             Log.d(TAG, "DataManager: save is true");
             saveToTextFile(obj);
 
-        }else if (obj.save == 1){
+        }else{
             Log.d(TAG, "DataManager: save is false");
             eraseTextFile(obj);
         }
@@ -73,9 +73,15 @@ class DataManager{
     public void saveToTextFile(DataManager obj) {
 
        File folder = getFolder(obj);
+       int n = 0;
 
         try {
             File note = new File(folder, obj.title + ".txt");
+
+            while(note.exists()){
+                n++;
+                note = new File(folder, obj.title + n + ".txt");
+            }
 
             PrintWriter writer = new PrintWriter(note);
             writer.write(obj.body);

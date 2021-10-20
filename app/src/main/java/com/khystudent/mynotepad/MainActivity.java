@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     String title;
     String body;
 
+    int id;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         if (!folder.exists()) {
             folder.mkdir();
         }
+
 //här fylls arrayen upp och kopplas sen till ListView
         fillArray(folder);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, notesMemory);
@@ -54,24 +57,9 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 title = adapterView.getItemAtPosition(i).toString();
-                Log.d(TAG, "onItemClick: " + title);
+                getFileData(folder);
 
-                File readFile = new File(folder, title + ".txt");
-                try {
-                    Scanner sc = new Scanner(readFile);
-                    body = sc.nextLine();
-                    Log.d(TAG, "onItemClick: " + body);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-                //title = title.substring(0, title.indexOf("."));
-
-                toaster(0);
-
-                Intent goToEdit = new Intent(MainActivity.this, Edit.class);
-                goToEdit.putExtra("title", title);
-                goToEdit.putExtra("body", body);
-                startActivity(goToEdit);
+                startActivity(createIntent(1));
             }
         });
 
@@ -80,10 +68,37 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent goToEdit = new Intent(MainActivity.this, Edit.class);
-                startActivity(goToEdit);
+                startActivity(createIntent(0));
             }
         });
+    }
+
+    public void getFileData(File folder){
+
+        File readFile = new File(folder, title + ".txt");
+        try {
+            Scanner sc = new Scanner(readFile);
+            body = sc.nextLine();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        toaster(0);
+    }
+
+    public Intent createIntent(int id){
+
+        Intent goToEdit = new Intent(MainActivity.this, Edit.class);
+
+        switch (id){
+            case 0:
+                break;
+            case 1:
+                goToEdit.putExtra("title", title);
+                goToEdit.putExtra("body", body);
+                break;
+        }
+        return goToEdit;
     }
 
     /**
