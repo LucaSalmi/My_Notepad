@@ -1,7 +1,9 @@
 package com.khystudent.mynotepad;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -88,7 +90,7 @@ public class EditActivity extends AppCompatActivity {
     }
 
     public void eraseButtonSecurity(){
-
+/*
         if (!confirmDelete) {
             toaster(1);
             confirmDelete = true;
@@ -101,7 +103,25 @@ public class EditActivity extends AppCompatActivity {
             confirmDelete = false;
             startActivity(backToMain());
         }
+ */
 
+        new AlertDialog.Builder(EditActivity.this)
+                .setTitle("Delete entry")
+                .setMessage("Are you sure you want to delete this entry?")
+
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        getInputText();
+                        DataManager deleteNote = new DataManager(EditActivity.this, titleText, bodyText, false);
+                        toaster(1);
+                        startActivity(backToMain());
+                    }
+                })
+
+                .setNegativeButton(android.R.string.no, null)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
 
     }
 
@@ -161,11 +181,6 @@ public class EditActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
                 break;
             case 1:
-                Toast.makeText(EditActivity.this,
-                        getString(R.string.toast_sure),
-                        Toast.LENGTH_SHORT).show();
-                break;
-            case 2:
                 Toast.makeText(EditActivity.this,
                         getString(R.string.toast_note) + titleText + getString(R.string.toast_deleted),
                         Toast.LENGTH_SHORT).show();
