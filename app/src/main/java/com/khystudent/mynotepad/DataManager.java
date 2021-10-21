@@ -24,11 +24,11 @@ class DataManager{
     String extension = ".txt";
 
     /**
-     * Constructor till DataManager
-     * @param context contextet som används för att får tillgång till filer
-     * @param title titel på note som används som fil namn
-     * @param body texten som sparas in i filen
-     * @param save 0 eller 1 identifierar om filen ska sparas eller radera
+     * Constructor for DataManager
+     * @param context context used to get acces to the files folder
+     * @param title title of the note, used as file name
+     * @param body the text that will be saved in the file
+     * @param save boolean that determines if the file should be saved or erased
      */
     public DataManager(AppCompatActivity context, String title, String body, boolean save, boolean checkIfSame) {
 
@@ -43,7 +43,7 @@ class DataManager{
     }
 
     /**
-     * kollar om man vill radera eller spara en fil och anropar rätt metod
+     * checks if the user wants to save or delete a file
      * @param obj
      */
     private void checkErase(DataManager obj){
@@ -59,8 +59,8 @@ class DataManager{
     }
 
     /**
-     * raderar file från minnen
-     * @param obj
+     * deletes the file from phone memory
+     * @param obj the object Data Manager that contains all the relevant data
      */
     private void eraseTextFile(DataManager obj) {
 
@@ -71,8 +71,8 @@ class DataManager{
     }
 
     /**
-     * sparar filen i minnnen
-     * @param obj
+     * saves the file in the phone memory
+     * @param obj the object Data Manager that contains all the relevant data
      */
     private void saveToTextFile(DataManager obj) {
 
@@ -101,9 +101,9 @@ class DataManager{
     }
 
     /**
-     * hämtar mappen där filerna ligger
-     * @param obj objektet vi manipulerar, hän används bara CONTEXT variabel
-     * @return
+     * gets the directory where the files are
+     * @param obj the object Data Manager that contains all the relevant data
+     * @return the address as a File variable
      */
     private File getFolder(DataManager obj){
 

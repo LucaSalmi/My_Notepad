@@ -9,7 +9,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -44,10 +43,10 @@ public class MainActivity extends AppCompatActivity {
         setFields();
         setFolder();
         setListeners();
-        fillArray();
+        setAdapter();
     }
 
-    private void fillArray(){
+    private void setAdapter(){
 
         fillArray(folder);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.my_list_view_item, notesMemory);
@@ -95,8 +94,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * hämtar dat från txt file när man trycker på en element i lista
-     * @param folder adressen på dyrectory där alla txt filer är
+     * retrieves the data when user presses an element in the list
+     * @param folder directory where files are
      */
     private void getFileData(File folder){
 
@@ -111,6 +110,10 @@ public class MainActivity extends AppCompatActivity {
         toaster(0);
     }
 
+    /**
+     * creates the Intent object that goes to EditActivity
+     * @return Intent
+     */
     private Intent createIntent(int id){
 
         Intent goToEdit = new Intent(MainActivity.this, EditActivity.class);
@@ -128,8 +131,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * fyller en Array List med alla txt filers namn för att visa de till användare
-     * @param folder positionen av mappen med alla filer
+     * fills an ArrayList with the names of the text files (the title the user has given them)
+     * @param folder directory where files are
      */
     private void fillArray(File folder) {
 
@@ -149,8 +152,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * skapar Toast meddelande när anropad
-     * @param id identifiera vilken toast ska visas upp.
+     * creates Toast messages
+     * @param id signals which Toast to create
      */
     private void toaster(int id) {
 
