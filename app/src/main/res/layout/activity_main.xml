@@ -14,6 +14,7 @@
         android:background="@drawable/background_dimmer"
         android:fontFamily="@font/annie_use_your_telescope"
         android:text="@string/app_name"
+        android:textColor="@color/black"
         android:textAlignment="center"
         android:textSize="@dimen/title_size"
         android:textStyle="bold"></TextView>

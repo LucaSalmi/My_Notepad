@@ -22,6 +22,7 @@
         android:textAlignment="center"
         android:fontFamily="@font/annie_use_your_telescope"
         android:textStyle="bold"
+        android:textColor="@color/black"
         android:textSize="@dimen/title_size"></EditText>
 
     <EditText
@@ -36,6 +37,7 @@
         android:gravity="top|start"
         android:hint="@string/edit_body_hint"
         android:inputType="textMultiLine"
+        android:textColor="@color/black"
         android:textSize="@dimen/text_size"
         android:textStyle="bold"></EditText>
 
