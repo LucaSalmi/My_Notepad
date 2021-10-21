@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 public class EditActivity extends AppCompatActivity {
@@ -17,8 +18,8 @@ public class EditActivity extends AppCompatActivity {
     EditText title;
     EditText body;
 
-    Button save;
-    Button erase;
+    ImageButton save;
+    ImageButton erase;
 
     String titleText;
     String bodyText;

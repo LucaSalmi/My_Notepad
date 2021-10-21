@@ -27,7 +27,7 @@
         android:layout_below="@id/btn_new_file"></ListView>
 
 
-    <Button
+    <ImageButton
         android:id="@+id/btn_new_file"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
         android:layout_weight="1"
         android:background="@drawable/background_dimmer"
         android:fontFamily="@font/annie_use_your_telescope"
-        android:text="@string/new_button_text"
-        android:textSize="@dimen/text_size"></Button>
+        android:src="@drawable/new_note"
+        android:textSize="@dimen/text_size"></ImageButton>
 
 </RelativeLayout>
