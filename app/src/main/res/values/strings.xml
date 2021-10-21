@@ -12,4 +12,5 @@
     <string name="error_text">The field cannot be empty</string>
     <string name="extension_txt">.txt</string>
     <string name="toast_loaded">" loaded"</string>
+    <string name="error_dot_in_title">"Title can not contain \".\" "</string>
 </resources>

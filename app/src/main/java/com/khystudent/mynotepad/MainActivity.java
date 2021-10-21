@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     String body;
 
     boolean checkIfSame = false;
+    File folder;
+    File readFile;
 
 
     @Override
@@ -39,20 +41,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        notesList = findViewById(R.id.lv_notes_list);
-        newFile = findViewById(R.id.btn_new_file);
+        setFields();
+        setFolder();
+        setListeners();
+        fillArray();
+    }
 
-        Animation bounce = AnimationUtils.loadAnimation(MainActivity.this, R.anim.bounce);
+    private void fillArray(){
 
-        File folder = new File(this.getFilesDir(), "notes");
-        if (!folder.exists()) {
-            folder.mkdir();
-        }
-
-//här fylls arrayen upp och kopplas sen till ListView
         fillArray(folder);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.my_list_view_item, notesMemory);
         notesList.setAdapter(adapter);
+    }
+
+    private void setListeners() {
+
+        Animation bounce = AnimationUtils.loadAnimation(MainActivity.this, R.anim.bounce);
 
         notesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -76,9 +80,27 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void getFileData(File folder){
+    private void setFolder(){
 
-        File readFile = new File(folder, title + getString(R.string.extension_txt));
+        folder = new File(this.getFilesDir(), "notes");
+        if (!folder.exists()) {
+            folder.mkdir();
+        }
+    }
+
+    private void setFields(){
+
+        notesList = findViewById(R.id.lv_notes_list);
+        newFile = findViewById(R.id.btn_new_file);
+    }
+
+    /**
+     * hämtar dat från txt file när man trycker på en element i lista
+     * @param folder adressen på dyrectory där alla txt filer är
+     */
+    private void getFileData(File folder){
+
+        readFile = new File(folder, title + getString(R.string.extension_txt));
         try {
             Scanner sc = new Scanner(readFile);
             body = sc.nextLine();
@@ -89,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
         toaster(0);
     }
 
-    public Intent createIntent(int id){
+    private Intent createIntent(int id){
 
         Intent goToEdit = new Intent(MainActivity.this, EditActivity.class);
 
@@ -109,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
      * fyller en Array List med alla txt filers namn för att visa de till användare
      * @param folder positionen av mappen med alla filer
      */
-    public void fillArray(File folder) {
+    private void fillArray(File folder) {
 
         File[] folderContent = folder.listFiles();
 
@@ -130,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
      * skapar Toast meddelande när anropad
      * @param id identifiera vilken toast ska visas upp.
      */
-    public void toaster(int id) {
+    private void toaster(int id) {
 
         switch (id) {
 

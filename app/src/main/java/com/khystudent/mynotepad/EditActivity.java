@@ -1,5 +1,7 @@
 package com.khystudent.mynotepad;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,7 +10,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -34,12 +39,25 @@ public class EditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
 
+
+        setFields();
+        onNoteLoad();
+        setListeners();
+
+
+    }
+
+    public void setFields(){
+
         title = findViewById(R.id.et_note_title);
         body = findViewById(R.id.et_note_body);
         save = findViewById(R.id.btn_save_note);
         erase = findViewById(R.id.btn_erase_note);
+    }
 
-        onNoteLoad();
+    public void setListeners(){
+
+        Animation bounce = AnimationUtils.loadAnimation(EditActivity.this, R.anim.bounce);
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,7 +65,8 @@ public class EditActivity extends AppCompatActivity {
 
                 getInputText();
                 sendToSave();
-
+                Log.d(TAG, "onClick: save anim starting");
+                save.startAnimation(bounce);
             }
         });
 
@@ -56,30 +75,47 @@ public class EditActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 eraseButtonSecurity();
+                Log.d(TAG, "onClick: erase anim starting");
+                erase.startAnimation(bounce);
+
             }
         });
     }
 
     /**
-     * hämtar texten från edit text fält och kollar om de är tomma, i så fall visas ett felmeddellande upp
+     * get text from EdiText and converts it to String
      */
     public void getInputText() {
 
         titleText = title.getText().toString();
         bodyText = body.getText().toString();
 
+        fieldsNotEmpty = checkForErrors(titleText, bodyText);
+    }
+
+    /**
+     * checks if fields are empty or if string titleText contains "."
+     * @param titleText string value of title Entertext
+     * @param bodyText string value of body Entertext
+     * @return true if no error are present, false otherwise
+     */
+    private boolean checkForErrors(String titleText, String bodyText){
+
         if (TextUtils.isEmpty(titleText) && TextUtils.isEmpty(bodyText)) {
             showError(0);
-            return;
+            return false;
         } else if (TextUtils.isEmpty(titleText)) {
             showError(1);
-            return;
+            return false;
         } else if (TextUtils.isEmpty(bodyText)) {
             showError(2);
-            return;
+            return false;
+        }else if (titleText.contains(".")){
+            showError(3);
+            return false;
         }
 
-        fieldsNotEmpty = true;
+        return true;
     }
 
     public void sendToSave(){
@@ -114,7 +150,7 @@ public class EditActivity extends AppCompatActivity {
     }
 
     /**
-     * skapar Intent objekt som går tillbaka till Main activity
+     * creates the Intent object that returns to MainActivity
      * @return Intent
      */
     public Intent backToMain() {
@@ -123,7 +159,7 @@ public class EditActivity extends AppCompatActivity {
     }
 
     /**
-     * hämtar datan om man laddar ett fil som redan existerar
+     * gets eventual data present in the Intent if the user is loading a note
      */
     public void onNoteLoad() {
 
@@ -137,12 +173,11 @@ public class EditActivity extends AppCompatActivity {
         if(!checkIfSame){
             title.setInputType(InputType.TYPE_NULL);
         }
-
     }
 
     /**
-     * visar felmeddelandet om nån fält är tom
-     * @param id bestämmer vart ska felet visas upp
+     * Shows error if fields are empty or if a forbidden character is present
+     * @param id signals where to show the error message
      */
     public void showError(int id) {
 
@@ -158,12 +193,15 @@ public class EditActivity extends AppCompatActivity {
             case 2:
                 body.setError(getString(R.string.error_text));
                 break;
+            case 3:
+                title.setError(getString(R.string.error_dot_in_title));
+                break;
         }
     }
 
     /**
-     * skapar Toast meddelande när anropad
-     * @param id identifiera vilken toast ska visas upp.
+     * creates Toast messages
+     * @param id signals which Toast to create
      */
     public void toaster(int id) {
 
