@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     String title;
     String body;
 
+    boolean checkIfSame = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
             case 1:
                 goToEdit.putExtra("title", title);
                 goToEdit.putExtra("body", body);
+                goToEdit.putExtra("loadedNote", checkIfSame);
                 break;
         }
         return goToEdit;

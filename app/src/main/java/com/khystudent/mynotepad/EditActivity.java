@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -25,8 +26,8 @@ public class EditActivity extends AppCompatActivity {
     String bodyText;
 
 
-    boolean confirmDelete = false;
     boolean fieldsNotEmpty = false;
+    boolean checkIfSame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,27 +85,13 @@ public class EditActivity extends AppCompatActivity {
     public void sendToSave(){
 
         if (fieldsNotEmpty) {
-            DataManager newNote = new DataManager(EditActivity.this, titleText, bodyText, true);
+            DataManager newNote = new DataManager(EditActivity.this, titleText, bodyText, true, checkIfSame);
             toaster(0);
             startActivity(backToMain());
         }
     }
 
     public void eraseButtonSecurity(){
-/*
-        if (!confirmDelete) {
-            toaster(1);
-            confirmDelete = true;
-
-        }else{
-
-            getInputText();
-            DataManager deleteNote = new DataManager(EditActivity.this, titleText, bodyText, false);
-            toaster(2);
-            confirmDelete = false;
-            startActivity(backToMain());
-        }
- */
 
         new AlertDialog.Builder(EditActivity.this)
                 .setTitle("Delete entry")
@@ -114,7 +101,7 @@ public class EditActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
 
                         getInputText();
-                        DataManager deleteNote = new DataManager(EditActivity.this, titleText, bodyText, false);
+                        DataManager deleteNote = new DataManager(EditActivity.this, titleText, bodyText, false, checkIfSame);
                         toaster(1);
                         startActivity(backToMain());
                     }
@@ -142,9 +129,15 @@ public class EditActivity extends AppCompatActivity {
 
         String t = getIntent().getStringExtra("title");
         String b = getIntent().getStringExtra("body");
+        checkIfSame = getIntent().getBooleanExtra("loadedNote",true);
 
         title.setText(t);
         body.setText(b);
+
+        if(!checkIfSame){
+            title.setInputType(InputType.TYPE_NULL);
+        }
+
     }
 
     /**

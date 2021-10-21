@@ -19,6 +19,7 @@ class DataManager{
     private String title;
     private String body;
     private boolean save;
+    private boolean checkIfSame;
 
     String extension = ".txt";
 
@@ -29,12 +30,13 @@ class DataManager{
      * @param body texten som sparas in i filen
      * @param save 0 eller 1 identifierar om filen ska sparas eller radera
      */
-    public DataManager(AppCompatActivity context, String title, String body, boolean save) {
+    public DataManager(AppCompatActivity context, String title, String body, boolean save, boolean checkIfSame) {
 
         this.CONTEXT = context;
         this.title = title;
         this.body = body;
         this.save = save;
+        this.checkIfSame = checkIfSame;
         Log.d(TAG, "DataManager: "+ this.save);
         checkErase(this);
 
@@ -72,17 +74,20 @@ class DataManager{
      * sparar filen i minnnen
      * @param obj
      */
-    public void saveToTextFile(DataManager obj) {
+    private void saveToTextFile(DataManager obj) {
 
        File folder = getFolder(obj);
        int n = 0;
 
         try {
             File note = new File(folder, obj.title + extension);
+
 //loopen kollar om det finns ett fil med samma namn och, i så fall, ändrar namnet till title + en siffra.
-            while(note.exists()){
-                n++;
-                note = new File(folder, obj.title + n + extension);
+            if(obj.checkIfSame){
+                while(note.exists()){
+                    n++;
+                    note = new File(folder, obj.title + n + extension);
+                }
             }
 
             PrintWriter writer = new PrintWriter(note);
@@ -100,7 +105,7 @@ class DataManager{
      * @param obj objektet vi manipulerar, hän används bara CONTEXT variabel
      * @return
      */
-    public File getFolder(DataManager obj){
+    private File getFolder(DataManager obj){
 
         File folder = new File(obj.CONTEXT.getFilesDir(), "notes");
         if (!folder.exists()) {
