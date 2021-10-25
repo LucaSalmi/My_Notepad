@@ -25,14 +25,14 @@ public class MainActivity extends AppCompatActivity {
 
     ImageButton newFile;
 
-    ArrayList<String> notesMemory = new ArrayList<>();
-
     String title;
     String body;
 
     boolean checkIfSame = false;
     File folder;
-    File readFile;
+
+    ArrayList<String> notesMemory = new ArrayList<>();
+
 
 
     @Override
@@ -48,8 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setAdapter(){
 
-        fillArray(folder);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.my_list_view_item, notesMemory);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.my_list_view_item, DataManager.fillArray(folder, notesMemory));
         notesList.setAdapter(adapter);
     }
 
@@ -62,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 title = adapterView.getItemAtPosition(i).toString();
-                getFileData(folder);
+                body = DataManager.getFileData(folder, title, getString(R.string.extension_txt));
 
                 startActivity(createIntent(1));
             }
@@ -93,22 +92,6 @@ public class MainActivity extends AppCompatActivity {
         newFile = findViewById(R.id.btn_new_file);
     }
 
-    /**
-     * retrieves the data when user presses an element in the list
-     * @param folder directory where files are
-     */
-    private void getFileData(File folder){
-
-        readFile = new File(folder, title + getString(R.string.extension_txt));
-        try {
-            Scanner sc = new Scanner(readFile);
-            body = sc.nextLine();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        toaster(0);
-    }
 
     /**
      * creates the Intent object that goes to EditActivity
@@ -130,26 +113,6 @@ public class MainActivity extends AppCompatActivity {
         return goToEdit;
     }
 
-    /**
-     * fills an ArrayList with the names of the text files (the title the user has given them)
-     * @param folder directory where files are
-     */
-    private void fillArray(File folder) {
-
-        File[] folderContent = folder.listFiles();
-
-        if (folderContent != null) {
-
-            for (File file : folderContent) {
-                if (file.isFile()) {
-                    String temp = file.getName();
-                    temp = temp.substring(0, temp.indexOf("."));
-                    notesMemory.add(temp);
-                }
-            }
-        }
-        Collections.reverse(notesMemory);
-    }
 
     /**
      * creates Toast messages

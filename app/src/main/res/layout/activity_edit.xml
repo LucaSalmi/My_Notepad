@@ -23,12 +23,13 @@
         android:fontFamily="@font/annie_use_your_telescope"
         android:textStyle="bold"
         android:textColor="@color/black"
-        android:textSize="@dimen/title_size"></EditText>
+        android:textSize="@dimen/title_size"
+        android:imeOptions="actionNext"></EditText>
 
     <EditText
         android:id="@+id/et_note_body"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/et_note_title"
         android:layout_marginLeft="@dimen/margin_5"
         android:layout_marginRight="@dimen/margin_5"
@@ -36,7 +37,6 @@
         android:fontFamily="@font/annie_use_your_telescope"
         android:gravity="top|start"
         android:hint="@string/edit_body_hint"
-        android:inputType="textMultiLine"
         android:textColor="@color/black"
         android:textSize="@dimen/text_size"
         android:textStyle="bold"></EditText>
@@ -45,15 +45,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@drawable/background_dimmer">
 
         <ImageButton
             android:id="@+id/btn_save_note"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/transparent"
             android:layout_marginLeft="@dimen/margin_5"
             android:layout_marginRight="@dimen/margin_5"
+            android:background="@color/transparent"
             android:paddingTop="@dimen/padding_10"
             android:layout_weight="1"
             android:src="@drawable/save_2"></ImageButton>
