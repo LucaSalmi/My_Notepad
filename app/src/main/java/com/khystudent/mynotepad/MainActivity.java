@@ -36,10 +36,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setFields();
-        setFolder();
-        setListeners();
-        setAdapter();
+        setFields(); // initiate Text/Edit views
+        setFolder(); // initiate folder directory
+        setListeners(); // initiate OnClickListeners
+        setAdapter(); // initiate Array adapter
     }
 
     private void setAdapter() {
