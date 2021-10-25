@@ -41,9 +41,9 @@ public class EditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit);
 
 
-        setFields();
-        onNoteLoad();
-        setListeners();
+        setFields(); // initiate Text/Edit views
+        onNoteLoad(); // takes in extra elements from Intent if presents
+        setListeners(); // initiate OnClickListeners
 
     }
 
