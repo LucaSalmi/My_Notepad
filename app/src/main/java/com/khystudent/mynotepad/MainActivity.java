@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> notesMemory = new ArrayList<>();
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         setAdapter();
     }
 
-    private void setAdapter(){
+    private void setAdapter() {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.my_list_view_item, DataManager.fillArray(folder, notesMemory));
         listViewNotes.setAdapter(adapter);
@@ -59,8 +58,8 @@ public class MainActivity extends AppCompatActivity {
 
                 title = adapterView.getItemAtPosition(i).toString();
                 body = DataManager.getFileData(folder, title, getString(R.string.extension_txt));
-
-                startActivity(createIntent(1));
+                toaster(0);
+                startActivity(createIntent(1)); //id 1 adds extra information to the Intent
             }
         });
 
@@ -70,12 +69,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 imgButtonNewFile.startAnimation(bounce);
 
-                startActivity(createIntent(0));
+                startActivity(createIntent(0)); //id 0 adds nothing to the Intent
             }
         });
     }
 
-    private void setFolder(){
+    private void setFolder() {
 
         folder = new File(this.getFilesDir(), "notes");
         if (!folder.exists()) {
@@ -83,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void setFields(){
+    private void setFields() {
 
         listViewNotes = findViewById(R.id.lv_notes_list);
         imgButtonNewFile = findViewById(R.id.btn_new_file);
@@ -92,13 +91,14 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * creates the Intent object that goes to EditActivity
+     *
      * @return Intent
      */
-    private Intent createIntent(int id){
+    private Intent createIntent(int id) {
 
         Intent goToEdit = new Intent(MainActivity.this, EditActivity.class);
 
-        switch (id){
+        switch (id) {
             case 0:
                 break;
             case 1:
@@ -113,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * creates Toast messages
+     *
      * @param id signals which Toast to create
      */
     private void toaster(int id) {

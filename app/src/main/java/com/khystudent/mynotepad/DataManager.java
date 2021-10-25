@@ -125,12 +125,14 @@ class DataManager {
 
     /**
      * retrieves the data when user presses an element in the list
-     * @param folder directory where files are
-     * @param title name of the file
+     *
+     * @param folder    directory where files are
+     * @param title     name of the file
      * @param extension String resource ".txt"
      * @return
      */
     public static String getFileData(File folder, String title, String extension) {
+
         String body = "";
         File readFile;
 
@@ -147,11 +149,12 @@ class DataManager {
 
     /**
      * fills an ArrayList with the names of the text files (the title the user has given them)
-     * @param folder directory where files are
+     *
+     * @param folder      directory where files are
      * @param notesMemory
      * @return
      */
-    public static ArrayList<String> fillArray(File folder, ArrayList<String> notesMemory){
+    public static ArrayList<String> fillArray(File folder, ArrayList<String> notesMemory) {
 
         File[] folderContent = folder.listFiles();
 
