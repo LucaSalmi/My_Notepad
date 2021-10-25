@@ -55,11 +55,9 @@ class DataManager {
     private void checkErase(DataManager obj) {
 
         if (obj.save) {
-            Log.d(TAG, "DataManager: save is true");
             saveToTextFile(obj);
 
         } else {
-            Log.d(TAG, "DataManager: save is false");
             eraseTextFile(obj);
         }
     }
@@ -90,7 +88,7 @@ class DataManager {
         try {
             File note = new File(folder, obj.title + extension);
 
-//loopen kollar om det finns ett fil med samma namn och, i så fall, ändrar namnet till title + en siffra.
+//this loop checks if two files have the same same and in that case, before saving the new one, adds a number to the name.
             if (obj.checkIfSame) {
                 while (note.exists()) {
                     n++;
