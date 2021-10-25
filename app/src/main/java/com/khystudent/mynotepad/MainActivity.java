@@ -14,16 +14,13 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
 
-    ListView notesList;
+    ListView listViewNotes;
 
-    ImageButton newFile;
+    ImageButton imgButtonNewFile;
 
     String title;
     String body;
@@ -49,14 +46,14 @@ public class MainActivity extends AppCompatActivity {
     private void setAdapter(){
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.my_list_view_item, DataManager.fillArray(folder, notesMemory));
-        notesList.setAdapter(adapter);
+        listViewNotes.setAdapter(adapter);
     }
 
     private void setListeners() {
 
         Animation bounce = AnimationUtils.loadAnimation(MainActivity.this, R.anim.bounce);
 
-        notesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listViewNotes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
@@ -68,10 +65,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        newFile.setOnClickListener(new View.OnClickListener() {
+        imgButtonNewFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                newFile.startAnimation(bounce);
+                imgButtonNewFile.startAnimation(bounce);
 
                 startActivity(createIntent(0));
             }
@@ -88,8 +85,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void setFields(){
 
-        notesList = findViewById(R.id.lv_notes_list);
-        newFile = findViewById(R.id.btn_new_file);
+        listViewNotes = findViewById(R.id.lv_notes_list);
+        imgButtonNewFile = findViewById(R.id.btn_new_file);
     }
 
 
