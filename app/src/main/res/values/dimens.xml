@@ -4,4 +4,6 @@
     <dimen name="margin_5">5dp</dimen>
     <dimen name="text_size">25sp</dimen>
     <dimen name="padding_10">10dp</dimen>
+    <dimen name="sub_item_size">18sp</dimen>
+    <dimen name="margin_50">50dp</dimen>
 </resources>

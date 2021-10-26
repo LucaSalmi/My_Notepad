@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private void setAdapter() {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.my_list_view_item, DataManager.fillArray(folder, notesMemory));
+
         listViewNotes.setAdapter(adapter);
     }
 
@@ -127,5 +128,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
     }
+
 
 }
