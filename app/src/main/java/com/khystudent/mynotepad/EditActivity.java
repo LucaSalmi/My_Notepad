@@ -47,7 +47,7 @@ public class EditActivity extends AppCompatActivity {
 
     }
 
-    private void setFields(){
+    private void setFields() {
 
         editTextTitle = findViewById(R.id.et_note_title);
         editTextBody = findViewById(R.id.et_note_body);
@@ -55,7 +55,7 @@ public class EditActivity extends AppCompatActivity {
         imgButtonErase = findViewById(R.id.btn_erase_note);
     }
 
-    private void setListeners(){
+    private void setListeners() {
 
         Animation bounce = AnimationUtils.loadAnimation(EditActivity.this, R.anim.bounce);
 
@@ -73,13 +73,12 @@ public class EditActivity extends AppCompatActivity {
 
                 eraseButtonSecurity();
                 imgButtonErase.startAnimation(bounce);
-
             }
         });
 
     }
 
-    private void onInputSave(Animation bounce){
+    private void onInputSave(Animation bounce) {
 
         getInputText();
         sendToSave();
@@ -99,11 +98,12 @@ public class EditActivity extends AppCompatActivity {
 
     /**
      * checks if fields are empty or if string titleText contains "."
+     *
      * @param titleText string value of title Entertext
-     * @param bodyText string value of body Entertext
+     * @param bodyText  string value of body Entertext
      * @return true if no error are present, false otherwise
      */
-    private boolean checkForErrors(String titleText, String bodyText){
+    private boolean checkForErrors(String titleText, String bodyText) {
 
         if (TextUtils.isEmpty(titleText) && TextUtils.isEmpty(bodyText)) {
             showError(0); //both fields are empty shows error in both fields
@@ -114,7 +114,7 @@ public class EditActivity extends AppCompatActivity {
         } else if (TextUtils.isEmpty(bodyText)) {
             showError(2);//body field is empty, shows error in body field
             return false;
-        }else if (titleText.contains(".")){
+        } else if (titleText.contains(".")) {
             showError(3);//there is a "." in the title, shows error in title field
             return false;
         }
@@ -122,19 +122,20 @@ public class EditActivity extends AppCompatActivity {
         return true;
     }
 
-    private void sendToSave(){
+    private void sendToSave() {
 
         if (fieldsNotEmpty) {
             DataManager newNote = new DataManager(EditActivity.this, titleText, bodyText, true, checkIfSame);
             toaster(0);
-            startActivity(backToMain());
+            finish();
+            //startActivity(backToMain());
         }
     }
 
     /**
      * creates an Alert Dialog to confirm if the user wants to erase a note
      */
-    private void eraseButtonSecurity(){
+    private void eraseButtonSecurity() {
 
         new AlertDialog.Builder(EditActivity.this)
                 .setTitle(getString(R.string.alert_dialog_title))
@@ -146,7 +147,7 @@ public class EditActivity extends AppCompatActivity {
                         getInputText();
                         DataManager deleteNote = new DataManager(EditActivity.this, titleText, bodyText, false, checkIfSame);
                         toaster(1);
-                        startActivity(backToMain());
+                        finish();
                     }
                 })
 
@@ -158,12 +159,18 @@ public class EditActivity extends AppCompatActivity {
 
     /**
      * creates the Intent object that returns to MainActivity
+     *
      * @return Intent
      */
+    /*
     private Intent backToMain() {
         Intent goToMain = new Intent(EditActivity.this, MainActivity.class);
         return goToMain;
     }
+
+     */
+
+
 
     /**
      * gets eventual data present in the Intent if the user is loading a note
@@ -172,18 +179,19 @@ public class EditActivity extends AppCompatActivity {
 
         String t = getIntent().getStringExtra("title");
         String b = getIntent().getStringExtra("body");
-        checkIfSame = getIntent().getBooleanExtra("loadedNote",true);
+        checkIfSame = getIntent().getBooleanExtra("loadedNote", true);
 
         editTextTitle.setText(t);
         editTextBody.setText(b);
 
-        if(!checkIfSame){
+        if (!checkIfSame) {
             editTextTitle.setInputType(InputType.TYPE_NULL);
         }
     }
 
     /**
      * Shows error if fields are empty or if a forbidden character is present
+     *
      * @param id signals where to show the error message
      */
     private void showError(int id) {
@@ -208,6 +216,7 @@ public class EditActivity extends AppCompatActivity {
 
     /**
      * creates Toast messages
+     *
      * @param id signals which Toast to create
      */
     private void toaster(int id) {

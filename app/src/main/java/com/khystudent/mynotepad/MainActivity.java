@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,13 +41,20 @@ public class MainActivity extends AppCompatActivity {
         setFolder(); // initiate folder directory
         setListeners(); // initiate OnClickListeners
         setAdapter(); // initiate Array adapter
+
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        notesMemory.clear();
+        setAdapter();
+
+    }
 
     private void setAdapter() {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.my_list_view_item, DataManager.fillArray(folder, notesMemory));
-
         listViewNotes.setAdapter(adapter);
     }
 
@@ -69,8 +77,8 @@ public class MainActivity extends AppCompatActivity {
         imgButtonNewFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                imgButtonNewFile.startAnimation(bounce);
 
+                imgButtonNewFile.startAnimation(bounce);
                 startActivity(createIntent(0)); //id 0 adds nothing to the Intent
             }
         });
