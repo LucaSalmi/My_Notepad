@@ -83,7 +83,7 @@ class DataManager {
     private void saveToTextFile(DataManager obj) {
 
         File folder = getFolder(obj);
-        int n = 0;
+        int n = 1;
 
         try {
             File note = new File(folder, obj.title + extension);
