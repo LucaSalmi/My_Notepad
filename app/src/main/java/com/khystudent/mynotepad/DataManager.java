@@ -148,8 +148,8 @@ class DataManager {
     /**
      * fills an ArrayList with the names of the text files (the title the user has given them)
      *
-     * @param folder      directory where files are
-     * @param notesMemory
+     * @param folder directory where files are
+     * @param notesMemory ArrayList containing the files names that will be showed
      * @return
      */
     public static ArrayList<String> fillArray(File folder, ArrayList<String> notesMemory) {

@@ -56,11 +56,13 @@
             android:textSize="@dimen/text_size"
             android:layout_weight="1"
             android:textStyle="bold"></EditText>
+
         <Button
             android:id="@+id/btn_add_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add"/>
+            android:text="Add"
+            android:fontFamily="@font/annie_use_your_telescope" />
 
     </LinearLayout>
 
