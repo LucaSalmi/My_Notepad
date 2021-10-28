@@ -6,4 +6,5 @@
     <dimen name="padding_10">10dp</dimen>
     <dimen name="sub_item_size">18sp</dimen>
     <dimen name="margin_50">50dp</dimen>
+    <dimen name="margin_15">15dp</dimen>
 </resources>

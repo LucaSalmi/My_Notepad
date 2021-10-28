@@ -24,9 +24,8 @@
         android:id="@+id/lv_notes_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/background_dimmer"
-        android:layout_below="@id/btn_new_file"></ListView>
-
+        android:layout_below="@id/btn_new_file"
+        android:background="@drawable/background_dimmer"></ListView>
 
     <ImageButton
         android:id="@+id/btn_new_file"
@@ -41,5 +40,30 @@
         android:fontFamily="@font/annie_use_your_telescope"
         android:src="@drawable/new_note"
         android:textSize="@dimen/text_size"></ImageButton>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/options_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/margin_15"
+        android:layout_marginRight="@dimen/margin_15"
+        android:src="@drawable/ic_baseline_add_circle_outline_24"
+        android:backgroundTint="@color/white" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/option_one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/options_button"
+        android:layout_alignParentRight="true"
+        app:fabSize="mini"
+        android:layout_marginBottom="@dimen/margin_5"
+        android:layout_marginRight="19dp"
+        android:src="@drawable/ic_baseline_add_circle_outline_24"
+        android:backgroundTint="@color/white"/>
+
+
 
 </RelativeLayout>

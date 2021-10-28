@@ -13,9 +13,10 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,11 +24,17 @@ public class MainActivity extends AppCompatActivity {
 
     ImageButton imgButtonNewFile;
 
+    FloatingActionButton floatingExtraButton;
+    FloatingActionButton floatingOptionOne;
+
     String title;
     String body;
 
     boolean checkIfSame = false;
+    boolean isFABOpen = false;
     File folder;
+
+    Intent goToActivity;
 
     ArrayList<String> notesMemory = new ArrayList<>();
 
@@ -69,7 +76,8 @@ public class MainActivity extends AppCompatActivity {
                 title = adapterView.getItemAtPosition(i).toString();
                 body = DataManager.getFileData(folder, title, getString(R.string.extension_txt));
                 toaster(0);
-                startActivity(createIntent(1)); //id 1 adds extra information to the Intent
+                createIntent(1);
+                startActivity(goToActivity); //id 1 adds extra information to the Intent
             }
         });
 
@@ -79,7 +87,27 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 imgButtonNewFile.startAnimation(bounce);
-                startActivity(createIntent(0)); //id 0 adds nothing to the Intent
+                createIntent(0);
+                startActivity(goToActivity); //id 0 adds nothing to the Intent
+            }
+        });
+
+        floatingExtraButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!isFABOpen){
+                    showMenu();
+                }else{
+                    closeMenu();
+                }
+            }
+        });
+
+        floatingOptionOne.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createIntent(2);
+                startActivity(goToActivity);
             }
         });
     }
@@ -96,28 +124,34 @@ public class MainActivity extends AppCompatActivity {
 
         listViewNotes = findViewById(R.id.lv_notes_list);
         imgButtonNewFile = findViewById(R.id.btn_new_file);
+        floatingExtraButton = findViewById(R.id.options_button);
+        floatingOptionOne = findViewById(R.id.option_one);
+        floatingOptionOne.hide();
     }
 
 
     /**
      * creates the Intent object that goes to EditActivity
      *
-     * @return Intent
      */
-    private Intent createIntent(int id) {
+    private void createIntent(int id) {
 
-        Intent goToEdit = new Intent(MainActivity.this, EditActivity.class);
 
         switch (id) {
             case 0:
+                goToActivity = new Intent(MainActivity.this, EditActivity.class);
                 break;
             case 1:
-                goToEdit.putExtra("title", title);
-                goToEdit.putExtra("body", body);
-                goToEdit.putExtra("loadedNote", checkIfSame);
+                goToActivity = new Intent(MainActivity.this, EditActivity.class);
+                goToActivity.putExtra("title", title);
+                goToActivity.putExtra("body", body);
+                goToActivity.putExtra("loadedNote", checkIfSame);
+                break;
+            case 2:
+                goToActivity = new Intent(MainActivity.this, ShoppingListActivity.class);
                 break;
         }
-        return goToEdit;
+
     }
 
 
@@ -136,6 +170,16 @@ public class MainActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
                 break;
         }
+    }
+
+    private void showMenu(){
+        isFABOpen = true;
+        floatingOptionOne.show();
+    }
+
+    private void closeMenu(){
+        isFABOpen = false;
+        floatingOptionOne.hide();
     }
 
 

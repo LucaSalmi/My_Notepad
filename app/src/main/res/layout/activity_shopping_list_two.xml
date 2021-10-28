@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/notepad_background">
+
+    <!-- Title -->
+    <EditText
+        android:id="@+id/et_note_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="@dimen/margin_5"
+        android:layout_marginRight="@dimen/margin_5"
+        android:background="@drawable/background_dimmer"
+        android:fontFamily="@font/annie_use_your_telescope"
+        android:hint="@string/edit_title_hint"
+        android:imeOptions="actionNext"
+        android:inputType="text"
+        android:maxLength="20"
+        android:paddingBottom="@dimen/margin_5"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/title_size"
+        android:textStyle="bold"></EditText>
+
+    <!-- Note body -->
+    <ListView
+        android:id="@+id/shop_list_items"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_dimmer"
+        android:layout_below="@+id/et_note_title"/>
+
+
+    <!-- Button Container -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/background_dimmer"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/et_new_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_5"
+            android:layout_marginRight="@dimen/margin_5"
+            android:background="@drawable/background_dimmer"
+            android:fontFamily="@font/annie_use_your_telescope"
+            android:hint="@string/edit_body_hint"
+            android:maxLines="1"
+            android:inputType="text"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size"
+            android:layout_weight="1"
+            android:textStyle="bold"></EditText>
+        <Button
+            android:id="@+id/btn_add_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add"/>
+
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>
