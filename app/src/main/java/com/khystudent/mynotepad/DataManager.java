@@ -42,7 +42,6 @@ class DataManager {
         this.body = body;
         this.save = save;
         this.checkIfSame = checkIfSame;
-        Log.d(TAG, "DataManager: " + this.save);
         checkErase(this);
 
     }
