@@ -3,6 +3,7 @@ package com.khystudent.mynotepad;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -11,8 +12,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class ShoppingListActivity extends AppCompatActivity {
 
@@ -28,6 +33,8 @@ public class ShoppingListActivity extends AppCompatActivity {
 
     ArrayAdapter<String> adapter;
 
+    String date = new SimpleDateFormat("dd-MM", Locale.getDefault()).format(new Date());
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,11 +43,11 @@ public class ShoppingListActivity extends AppCompatActivity {
         setFields();
         setListeners();
         setAdapter();
-
     }
 
     private void setFields(){
         title = findViewById(R.id.et_note_title);
+        title.setText(getString(R.string.shopping_list_baseline) + date);
         item = findViewById(R.id.et_new_item);
         add = findViewById(R.id.btn_add_item);
         itemsList = findViewById(R.id.shop_list_items);
@@ -70,12 +77,19 @@ public class ShoppingListActivity extends AppCompatActivity {
 
     private void getInputField(){
         String toAdd = item.getText().toString();
+
         if (toAdd.isEmpty()){
             return;
-        }else{
+
+        }else if (!checkForDoubles(toAdd)){
+            Toast.makeText(ShoppingListActivity.this, "Item is already present", Toast.LENGTH_SHORT).show();
+            return;
+        }else {
+
             shopItems.add(toAdd);
             item.setText("");
         }
+
     }
 
     private void setAdapter(){
@@ -92,6 +106,17 @@ public class ShoppingListActivity extends AppCompatActivity {
 
         DataManager shopList = new DataManager(ShoppingListActivity.this,
                 title.getText().toString(), temp,true, true);
+    }
+
+    private boolean checkForDoubles(String toAdd){
+
+        for (String s: shopItems) {
+
+            if (s.equals(toAdd)){
+                return false;
+            }
+        }
+        return true;
     }
 
 }

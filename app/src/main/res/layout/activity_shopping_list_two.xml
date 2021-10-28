@@ -19,7 +19,6 @@
         android:inputType="text"
         android:maxLength="20"
         android:paddingBottom="@dimen/margin_5"
-        android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="@dimen/title_size"
         android:textStyle="bold"></EditText>
