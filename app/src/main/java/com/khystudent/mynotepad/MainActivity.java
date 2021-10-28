@@ -1,9 +1,12 @@
 package com.khystudent.mynotepad;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -37,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     Intent goToActivity;
 
     ArrayList<String> notesMemory = new ArrayList<>();
+    ArrayList<String> shopItems = new ArrayList<>();
 
 
     @Override
@@ -73,11 +77,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                title = adapterView.getItemAtPosition(i).toString();
-                body = DataManager.getFileData(folder, title, getString(R.string.extension_txt));
-                toaster(0);
-                createIntent(1);
-                startActivity(goToActivity); //id 1 adds extra information to the Intent
+                loadNote(adapterView, i);
+
             }
         });
 
@@ -110,6 +111,41 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(goToActivity);
             }
         });
+    }
+
+    private void loadNote(AdapterView<?> adapterView, int i){
+        
+        int advance = 0;
+        title = adapterView.getItemAtPosition(i).toString();
+        
+        if (!title.contains(getString(R.string.shopping_list_baseline))){
+
+            body = DataManager.getFileData(folder, title, getString(R.string.extension_txt));
+            toaster(0);
+            createIntent(1);
+            startActivity(goToActivity); //id 1 adds extra information to the Intent
+        }else {
+            
+            body = DataManager.getFileData(folder, title, getString(R.string.extension_txt));
+
+            
+            for( i=0; i < (body.length()-1); i++){
+
+                if ((body.charAt(i)) == '/'){
+
+                    String temp = body.substring(advance, body.indexOf(i));
+                    shopItems.add(temp);
+                    advance = i+1;
+                    Log.d(TAG, "loadNote() returned: " + temp);
+                }
+
+            }
+            
+            
+            
+            
+        }
+
     }
 
     private void setFolder() {

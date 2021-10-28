@@ -5,34 +5,41 @@
     android:background="@drawable/notepad_background">
 
     <!-- Title -->
-    <EditText
-        android:id="@+id/et_note_title"
+    <LinearLayout
+        android:id="@+id/title_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="@dimen/margin_5"
-        android:layout_marginRight="@dimen/margin_5"
-        android:background="@drawable/background_dimmer"
-        android:fontFamily="@font/annie_use_your_telescope"
-        android:hint="@string/edit_title_hint"
-        android:imeOptions="actionNext"
-        android:inputType="text"
-        android:maxLength="20"
-        android:paddingBottom="@dimen/margin_5"
-        android:textColor="@color/black"
-        android:textSize="@dimen/title_size"
-        android:textStyle="bold"></EditText>
-
-    <ImageButton
-        android:id="@+id/save_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="@dimen/margin_15"
-        android:layout_marginRight="@dimen/margin_5"
-        android:background="@color/transparent"
-        android:src="@drawable/save_2"></ImageButton>
+        android:background="@drawable/background_dimmer">
+
+        <TextView
+            android:id="@+id/fixed_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/shopping_list_baseline"
+            android:fontFamily="@font/annie_use_your_telescope"
+            android:textStyle="bold"
+            android:textSize="@dimen/title_size"
+            android:textAlignment="center"
+            android:paddingBottom="@dimen/margin_5"
+            android:paddingLeft="@dimen/margin_5"
+            android:textColor="@color/black"></TextView>
+
+        <ImageButton
+            android:id="@+id/save_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/margin_15"
+            android:layout_marginRight="@dimen/margin_5"
+            android:background="@color/transparent"
+            android:src="@drawable/save_2"></ImageButton>
+
+    </LinearLayout>
+
 
     <!-- Note body -->
     <ListView
@@ -40,7 +47,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/background_dimmer"
-        android:layout_below="@+id/et_note_title"/>
+        android:layout_below="@+id/title_layout"/>
+
+
 
 
     <!-- Button Container -->

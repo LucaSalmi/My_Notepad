@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -21,7 +22,6 @@ import java.util.Locale;
 
 public class ShoppingListActivity extends AppCompatActivity {
 
-    EditText title;
     EditText item;
 
     Button add;
@@ -35,6 +35,7 @@ public class ShoppingListActivity extends AppCompatActivity {
 
     String date = new SimpleDateFormat("dd-MM", Locale.getDefault()).format(new Date());
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,8 +47,6 @@ public class ShoppingListActivity extends AppCompatActivity {
     }
 
     private void setFields(){
-        title = findViewById(R.id.et_note_title);
-        title.setText(getString(R.string.shopping_list_baseline) + date);
         item = findViewById(R.id.et_new_item);
         add = findViewById(R.id.btn_add_item);
         itemsList = findViewById(R.id.shop_list_items);
@@ -70,6 +69,7 @@ public class ShoppingListActivity extends AppCompatActivity {
                 Animation bounce = AnimationUtils.loadAnimation(ShoppingListActivity.this, R.anim.bounce);
                 saveBtn.startAnimation(bounce);
                 prepareToSave();
+                finish();
 
             }
         });
@@ -82,6 +82,7 @@ public class ShoppingListActivity extends AppCompatActivity {
             return;
 
         }else if (!checkForDoubles(toAdd)){
+
             Toast.makeText(ShoppingListActivity.this, "Item is already present", Toast.LENGTH_SHORT).show();
             return;
         }else {
@@ -99,13 +100,16 @@ public class ShoppingListActivity extends AppCompatActivity {
 
     private void prepareToSave(){
 
+        String listName = getString(R.string.shopping_list_baseline) + date;
+
         String temp = "";
         for (String s: shopItems) {
-            temp = s + "/n" + temp;
+            temp = s + "/" + temp;
         }
+        temp = temp + "/";
 
         DataManager shopList = new DataManager(ShoppingListActivity.this,
-                title.getText().toString(), temp,true, true);
+                listName, temp,true, true);
     }
 
     private boolean checkForDoubles(String toAdd){
