@@ -18,7 +18,11 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -96,9 +100,9 @@ public class MainActivity extends AppCompatActivity {
         floatingExtraButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!isFABOpen){
+                if (!isFABOpen) {
                     showMenu();
-                }else{
+                } else {
                     closeMenu();
                 }
             }
@@ -113,40 +117,28 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void loadNote(AdapterView<?> adapterView, int i){
-        
-        int advance = 0;
+    private void loadNote(AdapterView<?> adapterView, int i) {
+
         title = adapterView.getItemAtPosition(i).toString();
-        
-        if (!title.contains(getString(R.string.shopping_list_baseline))){
+
+
+        if (!title.contains(getString(R.string.shopping_list_baseline))) {
 
             body = DataManager.getFileData(folder, title, getString(R.string.extension_txt));
             toaster(0);
             createIntent(1);
             startActivity(goToActivity); //id 1 adds extra information to the Intent
-        }else {
-            
-            body = DataManager.getFileData(folder, title, getString(R.string.extension_txt));
 
-            
-            for( i=0; i < (body.length()-1); i++){
+        } else {
+            shopItems = DataManager.getShopListData(folder, title, getString(R.string.extension_txt));
+            createIntent(3);
+            startActivity(goToActivity);
 
-                if ((body.charAt(i)) == '/'){
-
-                    String temp = body.substring(advance, body.indexOf(i));
-                    shopItems.add(temp);
-                    advance = i+1;
-                    Log.d(TAG, "loadNote() returned: " + temp);
-                }
-
-            }
-            
-            
-            
-            
         }
 
+
     }
+
 
     private void setFolder() {
 
@@ -168,7 +160,6 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * creates the Intent object that goes to EditActivity
-     *
      */
     private void createIntent(int id) {
 
@@ -185,6 +176,13 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case 2:
                 goToActivity = new Intent(MainActivity.this, ShoppingListActivity.class);
+                shopItems.clear();
+                goToActivity.putExtra("loaded array", shopItems);
+                break;
+            case 3:
+                goToActivity = new Intent(MainActivity.this, ShoppingListActivity.class);
+                goToActivity.putExtra("loaded array", shopItems);
+                goToActivity.putExtra("loadedNote", checkIfSame);
                 break;
         }
 
@@ -208,12 +206,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void showMenu(){
+    private void showMenu() {
         isFABOpen = true;
         floatingOptionOne.show();
     }
 
-    private void closeMenu(){
+    private void closeMenu() {
         isFABOpen = false;
         floatingOptionOne.hide();
     }

@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,6 +27,7 @@ class DataManager {
 
 
     String extension = ".txt";
+
 
     /**
      * Constructor for DataManager
@@ -147,7 +149,7 @@ class DataManager {
     /**
      * fills an ArrayList with the names of the text files (the title the user has given them)
      *
-     * @param folder directory where files are
+     * @param folder      directory where files are
      * @param notesMemory ArrayList containing the files names that will be showed
      * @return
      */
@@ -168,4 +170,31 @@ class DataManager {
         Collections.reverse(notesMemory);
         return notesMemory;
     }
+
+    public static ArrayList<String> getShopListData(File folder, String title, String extension) {
+
+        ArrayList<String> shopItems = new ArrayList<>();
+        String body = "placeholder";
+        File readFile;
+
+
+        readFile = new File(folder, title + extension);
+        try {
+            Scanner sc = new Scanner(readFile);
+
+            while(sc.hasNext()){
+
+                body = sc.nextLine();
+                Log.d(TAG, "getShopListData: out "+body);
+                shopItems.add(body);
+            }
+            sc.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return shopItems;
+    }
+
+
 }

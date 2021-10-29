@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.text.InputType;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -35,6 +36,8 @@ public class ShoppingListActivity extends AppCompatActivity {
 
     String date = new SimpleDateFormat("dd-MM", Locale.getDefault()).format(new Date());
 
+    boolean checkIfSame;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +46,9 @@ public class ShoppingListActivity extends AppCompatActivity {
 
         setFields();
         setListeners();
+        onNoteLoad();
         setAdapter();
+
     }
 
     private void setFields(){
@@ -104,9 +109,8 @@ public class ShoppingListActivity extends AppCompatActivity {
 
         String temp = "";
         for (String s: shopItems) {
-            temp = s + "/" + temp;
+            temp = s + "\n" + temp;
         }
-        temp = temp + "/";
 
         DataManager shopList = new DataManager(ShoppingListActivity.this,
                 listName, temp,true, true);
@@ -121,6 +125,13 @@ public class ShoppingListActivity extends AppCompatActivity {
             }
         }
         return true;
+    }
+
+    private void onNoteLoad() {
+
+        shopItems = getIntent().getStringArrayListExtra("loaded array");
+        checkIfSame = getIntent().getBooleanExtra("loadedNote", true);
+
     }
 
 }
