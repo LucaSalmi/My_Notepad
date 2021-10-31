@@ -1,13 +1,16 @@
 package com.khystudent.mynotepad;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.text.InputType;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +18,8 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -26,7 +31,9 @@ public class ShoppingListActivity extends AppCompatActivity {
     EditText item;
 
     Button add;
-    ImageButton saveBtn;
+    FloatingActionButton multiFuncBtn;
+    FloatingActionButton btnFunctionOne;
+    FloatingActionButton btnFunctionTwo;
 
     ListView itemsList;
 
@@ -36,7 +43,12 @@ public class ShoppingListActivity extends AppCompatActivity {
 
     String date = new SimpleDateFormat("dd-MM", Locale.getDefault()).format(new Date());
 
-    boolean checkIfSame;
+    boolean checkIfSame = false;
+    boolean isFABOpen = false;
+    boolean emptyList;
+
+    String listName;
+    String listItems;
 
 
     @Override
@@ -55,10 +67,25 @@ public class ShoppingListActivity extends AppCompatActivity {
         item = findViewById(R.id.et_new_item);
         add = findViewById(R.id.btn_add_item);
         itemsList = findViewById(R.id.shop_list_items);
-        saveBtn = findViewById(R.id.save_button);
+        multiFuncBtn = findViewById(R.id.multi_function_btn);
+        btnFunctionOne = findViewById(R.id.save_floating);
+        btnFunctionTwo = findViewById(R.id.erase_floating);
+        btnFunctionOne.hide();
+        btnFunctionTwo.hide();
+
     }
 
     private void setListeners(){
+
+        itemsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                shopItems.remove(position);
+                adapter.notifyDataSetChanged();
+            }
+        });
+
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,28 +95,53 @@ public class ShoppingListActivity extends AppCompatActivity {
             }
         });
 
-        saveBtn.setOnClickListener(new View.OnClickListener() {
+        btnFunctionOne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Animation bounce = AnimationUtils.loadAnimation(ShoppingListActivity.this, R.anim.bounce);
-                saveBtn.startAnimation(bounce);
-                prepareToSave();
-                finish();
 
+                if(checkEmptyList()){
+
+                    prepareToSave();
+                    finish();
+                }
+
+            }
+        });
+
+        btnFunctionTwo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                eraseButtonSecurity();
+                finish();
+            }
+        });
+
+        multiFuncBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!isFABOpen) {
+                    showMenu();
+                } else {
+                    closeMenu();
+                }
             }
         });
     }
 
     private void getInputField(){
+
         String toAdd = item.getText().toString();
 
         if (toAdd.isEmpty()){
+
             return;
 
         }else if (!checkForDoubles(toAdd)){
 
             Toast.makeText(ShoppingListActivity.this, "Item is already present", Toast.LENGTH_SHORT).show();
             return;
+
         }else {
 
             shopItems.add(toAdd);
@@ -98,22 +150,67 @@ public class ShoppingListActivity extends AppCompatActivity {
 
     }
 
+    private boolean checkEmptyList(){
+
+        if (shopItems.isEmpty()){
+
+            Toast.makeText(ShoppingListActivity.this, "The list is empty", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+
     private void setAdapter(){
-         adapter = new ArrayAdapter<>(this, R.layout.my_list_view_item, shopItems);
+
+        adapter = new ArrayAdapter<>(this, R.layout.my_list_view_item, shopItems);
         itemsList.setAdapter(adapter);
+
     }
 
     private void prepareToSave(){
 
-        String listName = getString(R.string.shopping_list_baseline) + date;
+        listName = getString(R.string.shopping_list_baseline) + date;
 
         String temp = "";
         for (String s: shopItems) {
+
             temp = s + "\n" + temp;
         }
 
+        listItems = temp;
+        createSaveObj();
+
+    }
+
+    private void createSaveObj(){
+
         DataManager shopList = new DataManager(ShoppingListActivity.this,
-                listName, temp,true, true);
+                listName, listItems,true, true);
+    }
+
+    private void createDeleteObj(){
+
+        DataManager deleteNote = new DataManager(ShoppingListActivity.this,
+                listName, listItems, false, checkIfSame);
+    }
+
+    private void eraseButtonSecurity() {
+
+        new AlertDialog.Builder(ShoppingListActivity.this)
+                .setTitle(getString(R.string.alert_dialog_title))
+                .setMessage(getString(R.string.alert_dialog_message))
+
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        createDeleteObj();
+                    }
+                })
+
+                .setNegativeButton(android.R.string.no, null)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+
     }
 
     private boolean checkForDoubles(String toAdd){
@@ -131,7 +228,22 @@ public class ShoppingListActivity extends AppCompatActivity {
 
         shopItems = getIntent().getStringArrayListExtra("loaded array");
         checkIfSame = getIntent().getBooleanExtra("loadedNote", true);
+        listName = getIntent().getStringExtra("listName");
 
+    }
+
+    private void showMenu() {
+
+        isFABOpen = true;
+        btnFunctionOne.show();
+        btnFunctionTwo.show();
+    }
+
+    private void closeMenu() {
+
+        isFABOpen = false;
+        btnFunctionOne.hide();
+        btnFunctionTwo.hide();
     }
 
 }

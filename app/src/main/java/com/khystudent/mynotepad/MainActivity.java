@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     FloatingActionButton floatingExtraButton;
     FloatingActionButton floatingOptionOne;
+    FloatingActionButton floatingOptionTwo;
 
     String title;
     String body;
@@ -75,25 +76,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void setListeners() {
 
-        Animation bounce = AnimationUtils.loadAnimation(MainActivity.this, R.anim.bounce);
-
         listViewNotes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 loadNote(adapterView, i);
 
-            }
-        });
-
-
-        imgButtonNewFile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                imgButtonNewFile.startAnimation(bounce);
-                createIntent(0);
-                startActivity(goToActivity); //id 0 adds nothing to the Intent
             }
         });
 
@@ -115,6 +103,16 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(goToActivity);
             }
         });
+
+        floatingOptionTwo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                createIntent(0);
+                startActivity(goToActivity); //id 0 adds nothing to the Intent
+            }
+        });
+
     }
 
     private void loadNote(AdapterView<?> adapterView, int i) {
@@ -154,7 +152,9 @@ public class MainActivity extends AppCompatActivity {
         imgButtonNewFile = findViewById(R.id.btn_new_file);
         floatingExtraButton = findViewById(R.id.options_button);
         floatingOptionOne = findViewById(R.id.option_one);
+        floatingOptionTwo = findViewById(R.id.option_two);
         floatingOptionOne.hide();
+        floatingOptionTwo.hide();
     }
 
 
@@ -181,6 +181,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case 3:
                 goToActivity = new Intent(MainActivity.this, ShoppingListActivity.class);
+                goToActivity.putExtra("listName", title);
                 goToActivity.putExtra("loaded array", shopItems);
                 goToActivity.putExtra("loadedNote", checkIfSame);
                 break;
@@ -209,11 +210,13 @@ public class MainActivity extends AppCompatActivity {
     private void showMenu() {
         isFABOpen = true;
         floatingOptionOne.show();
+        floatingOptionTwo.show();
     }
 
     private void closeMenu() {
         isFABOpen = false;
         floatingOptionOne.hide();
+        floatingOptionTwo.hide();
     }
 
 

@@ -193,6 +193,7 @@ class DataManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        Collections.reverse(shopItems);
         return shopItems;
     }
 
