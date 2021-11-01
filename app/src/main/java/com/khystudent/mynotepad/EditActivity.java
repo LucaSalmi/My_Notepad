@@ -58,8 +58,7 @@ public class EditActivity extends AppCompatActivity {
         floatingExtraButton = findViewById(R.id.options_button);
         floatingOptionOne = findViewById(R.id.option_one);
         floatingOptionTwo = findViewById(R.id.option_two);
-        floatingOptionOne.hide();
-        floatingOptionTwo.hide();
+        closeMenu();
 
     }
 
