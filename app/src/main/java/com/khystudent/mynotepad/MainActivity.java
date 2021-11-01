@@ -29,8 +29,6 @@ public class MainActivity extends AppCompatActivity {
 
     ListView listViewNotes;
 
-    ImageButton imgButtonNewFile;
-
     FloatingActionButton floatingExtraButton;
     FloatingActionButton floatingOptionOne;
     FloatingActionButton floatingOptionTwo;
@@ -149,7 +147,6 @@ public class MainActivity extends AppCompatActivity {
     private void setFields() {
 
         listViewNotes = findViewById(R.id.lv_notes_list);
-        imgButtonNewFile = findViewById(R.id.btn_new_file);
         floatingExtraButton = findViewById(R.id.options_button);
         floatingOptionOne = findViewById(R.id.option_one);
         floatingOptionTwo = findViewById(R.id.option_two);
@@ -182,6 +179,7 @@ public class MainActivity extends AppCompatActivity {
             case 3:
                 goToActivity = new Intent(MainActivity.this, ShoppingListActivity.class);
                 goToActivity.putExtra("listName", title);
+                Log.d(TAG, "createIntent: "+title);
                 goToActivity.putExtra("loaded array", shopItems);
                 goToActivity.putExtra("loadedNote", checkIfSame);
                 break;

@@ -43,7 +43,7 @@ public class ShoppingListActivity extends AppCompatActivity {
 
     String date = new SimpleDateFormat("dd-MM", Locale.getDefault()).format(new Date());
 
-    boolean checkIfSame = false;
+    boolean checkIfSame;
     boolean isFABOpen = false;
     boolean emptyList;
 
@@ -102,7 +102,6 @@ public class ShoppingListActivity extends AppCompatActivity {
                 if(checkEmptyList()){
 
                     prepareToSave();
-                    finish();
                 }
 
             }
@@ -113,7 +112,6 @@ public class ShoppingListActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 eraseButtonSecurity();
-                finish();
             }
         });
 
@@ -185,13 +183,17 @@ public class ShoppingListActivity extends AppCompatActivity {
     private void createSaveObj(){
 
         DataManager shopList = new DataManager(ShoppingListActivity.this,
-                listName, listItems,true, true);
+                listName, listItems,true, checkIfSame);
+        finish();
+
     }
 
     private void createDeleteObj(){
 
         DataManager deleteNote = new DataManager(ShoppingListActivity.this,
                 listName, listItems, false, checkIfSame);
+        finish();
+
     }
 
     private void eraseButtonSecurity() {

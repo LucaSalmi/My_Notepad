@@ -24,22 +24,9 @@
         android:id="@+id/lv_notes_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btn_new_file"
+        android:layout_below="@id/tv_title"
         android:background="@drawable/background_dimmer"></ListView>
 
-    <ImageButton
-        android:id="@+id/btn_new_file"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_title"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="@dimen/margin_5"
-        android:layout_marginRight="@dimen/margin_5"
-        android:layout_weight="1"
-        android:background="@drawable/background_dimmer"
-        android:fontFamily="@font/annie_use_your_telescope"
-        android:src="@drawable/new_note"
-        android:textSize="@dimen/text_size"></ImageButton>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/options_button"
