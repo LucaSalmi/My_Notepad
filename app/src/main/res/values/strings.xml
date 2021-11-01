@@ -27,4 +27,5 @@
     <string name="shop_extra_hint">extra info</string>
     <string name="toast_empty_list">The list is empty</string>
     <string name="toast_double_item_input">The item is already in the list</string>
+    <string name="new_item">New item</string>
 </resources>
