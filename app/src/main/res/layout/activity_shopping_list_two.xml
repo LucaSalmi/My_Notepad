@@ -105,6 +105,8 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/black"
             android:fontFamily="@font/annie_use_your_telescope"
+            android:layout_marginRight="@dimen/margin_15"
+            android:layout_marginLeft="@dimen/margin_5"
             android:text="Add" />
 
     </LinearLayout>

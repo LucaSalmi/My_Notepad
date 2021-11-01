@@ -2,8 +2,10 @@ package com.khystudent.mynotepad;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.text.InputType;
