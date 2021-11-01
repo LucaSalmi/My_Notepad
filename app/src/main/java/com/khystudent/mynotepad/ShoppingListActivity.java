@@ -126,6 +126,9 @@ public class ShoppingListActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * reads the input field and adds the element to the array
+     */
     private void getInputField(){
 
         String toAdd = item.getText().toString();
@@ -164,6 +167,9 @@ public class ShoppingListActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * saves all elements in array to a string with a line breaker
+     */
     private void prepareToSave(){
 
         listName = getString(R.string.shopping_list_baseline) + date;
@@ -179,6 +185,9 @@ public class ShoppingListActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * creates the obj of DataManager class to save the list
+     */
     private void createSaveObj(){
 
         DataManager shopList = new DataManager(ShoppingListActivity.this,
@@ -187,6 +196,9 @@ public class ShoppingListActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * creates the obj of DataManager class to delete the list
+     */
     private void createDeleteObj(){
 
         DataManager deleteNote = new DataManager(ShoppingListActivity.this,

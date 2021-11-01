@@ -171,6 +171,13 @@ class DataManager {
         return notesMemory;
     }
 
+    /**
+     * gets called to retrieve all elements in a saved shopping list
+     * @param folder folder directory
+     * @param title title of note
+     * @param extension .txt string
+     * @return
+     */
     public static ArrayList<String> getShopListData(File folder, String title, String extension) {
 
         ArrayList<String> shopItems = new ArrayList<>();

@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
 
         title = adapterView.getItemAtPosition(i).toString();
 
-
+//checks if the element is a standard note or a shopping list and acts accordingly
         if (!title.contains(getString(R.string.shopping_list_baseline))) {
 
             body = DataManager.getFileData(folder, title, getString(R.string.extension_txt));
