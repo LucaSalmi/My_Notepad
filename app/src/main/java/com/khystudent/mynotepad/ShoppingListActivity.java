@@ -70,8 +70,7 @@ public class ShoppingListActivity extends AppCompatActivity {
         multiFuncBtn = findViewById(R.id.multi_function_btn);
         btnFunctionOne = findViewById(R.id.save_floating);
         btnFunctionTwo = findViewById(R.id.erase_floating);
-        btnFunctionOne.hide();
-        btnFunctionTwo.hide();
+        closeMenu();
 
     }
 
@@ -137,7 +136,7 @@ public class ShoppingListActivity extends AppCompatActivity {
 
         }else if (!checkForDoubles(toAdd)){
 
-            Toast.makeText(ShoppingListActivity.this, "Item is already present", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ShoppingListActivity.this, getString(R.string.toast_double_item_input), Toast.LENGTH_SHORT).show();
             return;
 
         }else {
@@ -152,7 +151,7 @@ public class ShoppingListActivity extends AppCompatActivity {
 
         if (shopItems.isEmpty()){
 
-            Toast.makeText(ShoppingListActivity.this, "The list is empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ShoppingListActivity.this, getString(R.string.toast_empty_list), Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;

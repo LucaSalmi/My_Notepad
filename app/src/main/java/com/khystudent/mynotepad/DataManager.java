@@ -185,7 +185,6 @@ class DataManager {
             while(sc.hasNext()){
 
                 body = sc.nextLine();
-                Log.d(TAG, "getShopListData: out "+body);
                 shopItems.add(body);
             }
             sc.close();

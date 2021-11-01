@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/save_floating"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="19dp"
+        android:layout_marginRight="@dimen/margin_mini_fab"
         android:layout_marginBottom="@dimen/margin_5"
         android:backgroundTint="@color/white"
         android:src="@drawable/ic_baseline_delete_24"
@@ -57,7 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/multi_function_btn"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="19dp"
+        android:layout_marginRight="@dimen/margin_mini_fab"
         android:layout_marginBottom="@dimen/margin_5"
         android:backgroundTint="@color/white"
         android:src="@drawable/ic_baseline_save_24"
@@ -71,7 +71,7 @@
         android:src="@drawable/ic_baseline_add_circle_outline_24"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_marginBottom="65dp"
+        android:layout_marginBottom="@dimen/margin_65"
         android:layout_marginRight="@dimen/margin_15"></com.google.android.material.floatingactionbutton.FloatingActionButton>
 
 
@@ -104,6 +104,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Add"
+            android:backgroundTint="@color/black"
             android:fontFamily="@font/annie_use_your_telescope" />
 
     </LinearLayout>

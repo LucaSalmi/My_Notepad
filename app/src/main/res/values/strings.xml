@@ -25,4 +25,6 @@
     <string name="alert_dialog_message">Are you sure you want to delete this note?</string>
     <string name="shopping_list_baseline">"Shopping List "</string>
     <string name="shop_extra_hint">extra info</string>
+    <string name="toast_empty_list">The list is empty</string>
+    <string name="toast_double_item_input">The item is already in the list</string>
 </resources>

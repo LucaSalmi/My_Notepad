@@ -20,13 +20,16 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 public class EditActivity extends AppCompatActivity {
 
     EditText editTextTitle;
     EditText editTextBody;
 
-    ImageButton imgButtonSave;
-    ImageButton imgButtonErase;
+    FloatingActionButton floatingExtraButton;
+    FloatingActionButton floatingOptionOne;
+    FloatingActionButton floatingOptionTwo;
 
     String titleText;
     String bodyText;
@@ -34,6 +37,7 @@ public class EditActivity extends AppCompatActivity {
 
     boolean fieldsNotEmpty = false;
     boolean checkIfSame;
+    boolean isFABOpen = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,38 +55,49 @@ public class EditActivity extends AppCompatActivity {
 
         editTextTitle = findViewById(R.id.et_note_title);
         editTextBody = findViewById(R.id.et_note_body);
-        imgButtonSave = findViewById(R.id.btn_save_note);
-        imgButtonErase = findViewById(R.id.btn_erase_note);
+        floatingExtraButton = findViewById(R.id.options_button);
+        floatingOptionOne = findViewById(R.id.option_one);
+        floatingOptionTwo = findViewById(R.id.option_two);
+        floatingOptionOne.hide();
+        floatingOptionTwo.hide();
+
     }
 
     private void setListeners() {
 
-        Animation bounce = AnimationUtils.loadAnimation(EditActivity.this, R.anim.bounce);
-
-        imgButtonSave.setOnClickListener(new View.OnClickListener() {
+        floatingExtraButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-
-                onInputSave(bounce);
+            public void onClick(View v) {
+                if (!isFABOpen) {
+                    showMenu();
+                } else {
+                    closeMenu();
+                }
             }
         });
 
-        imgButtonErase.setOnClickListener(new View.OnClickListener() {
+        floatingOptionOne.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                onInputSave();
+            }
+        });
+
+        floatingOptionTwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 eraseButtonSecurity();
-                imgButtonErase.startAnimation(bounce);
             }
         });
 
     }
 
-    private void onInputSave(Animation bounce) {
+    private void onInputSave() {
 
         getInputText();
         sendToSave();
-        imgButtonSave.startAnimation(bounce);
     }
 
     /**
@@ -158,21 +173,6 @@ public class EditActivity extends AppCompatActivity {
     }
 
     /**
-     * creates the Intent object that returns to MainActivity
-     *
-     * @return Intent
-     */
-    /*
-    private Intent backToMain() {
-        Intent goToMain = new Intent(EditActivity.this, MainActivity.class);
-        return goToMain;
-    }
-
-     */
-
-
-
-    /**
      * gets eventual data present in the Intent if the user is loading a note
      */
     private void onNoteLoad() {
@@ -234,6 +234,18 @@ public class EditActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
                 break;
         }
+    }
+
+    private void showMenu() {
+        isFABOpen = true;
+        floatingOptionOne.show();
+        floatingOptionTwo.show();
+    }
+
+    private void closeMenu() {
+        isFABOpen = false;
+        floatingOptionOne.hide();
+        floatingOptionTwo.hide();
     }
 
 

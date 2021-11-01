@@ -179,7 +179,6 @@ public class MainActivity extends AppCompatActivity {
             case 3:
                 goToActivity = new Intent(MainActivity.this, ShoppingListActivity.class);
                 goToActivity.putExtra("listName", title);
-                Log.d(TAG, "createIntent: "+title);
                 goToActivity.putExtra("loaded array", shopItems);
                 goToActivity.putExtra("loadedNote", checkIfSame);
                 break;
