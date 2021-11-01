@@ -173,8 +173,9 @@ class DataManager {
 
     /**
      * gets called to retrieve all elements in a saved shopping list
-     * @param folder folder directory
-     * @param title title of note
+     *
+     * @param folder    folder directory
+     * @param title     title of note
      * @param extension .txt string
      * @return
      */
@@ -189,7 +190,7 @@ class DataManager {
         try {
             Scanner sc = new Scanner(readFile);
 
-            while(sc.hasNext()){
+            while (sc.hasNext()) {
 
                 body = sc.nextLine();
                 shopItems.add(body);

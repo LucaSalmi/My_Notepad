@@ -63,7 +63,7 @@ public class ShoppingListActivity extends AppCompatActivity {
 
     }
 
-    private void setFields(){
+    private void setFields() {
         item = findViewById(R.id.et_new_item);
         add = findViewById(R.id.btn_add_item);
         itemsList = findViewById(R.id.shop_list_items);
@@ -74,7 +74,7 @@ public class ShoppingListActivity extends AppCompatActivity {
 
     }
 
-    private void setListeners(){
+    private void setListeners() {
 
         itemsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -98,7 +98,7 @@ public class ShoppingListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if(checkEmptyList()){
+                if (checkEmptyList()) {
 
                     prepareToSave();
                 }
@@ -129,20 +129,20 @@ public class ShoppingListActivity extends AppCompatActivity {
     /**
      * reads the input field and adds the element to the array
      */
-    private void getInputField(){
+    private void getInputField() {
 
         String toAdd = item.getText().toString();
 
-        if (toAdd.isEmpty()){
+        if (toAdd.isEmpty()) {
 
             return;
 
-        }else if (!checkForDoubles(toAdd)){
+        } else if (!checkForDoubles(toAdd)) {
 
             Toast.makeText(ShoppingListActivity.this, getString(R.string.toast_double_item_input), Toast.LENGTH_SHORT).show();
             return;
 
-        }else {
+        } else {
 
             shopItems.add(toAdd);
             item.setText("");
@@ -150,9 +150,9 @@ public class ShoppingListActivity extends AppCompatActivity {
 
     }
 
-    private boolean checkEmptyList(){
+    private boolean checkEmptyList() {
 
-        if (shopItems.isEmpty()){
+        if (shopItems.isEmpty()) {
 
             Toast.makeText(ShoppingListActivity.this, getString(R.string.toast_empty_list), Toast.LENGTH_SHORT).show();
             return false;
@@ -160,7 +160,7 @@ public class ShoppingListActivity extends AppCompatActivity {
         return true;
     }
 
-    private void setAdapter(){
+    private void setAdapter() {
 
         adapter = new ArrayAdapter<>(this, R.layout.my_list_view_item, shopItems);
         itemsList.setAdapter(adapter);
@@ -170,12 +170,12 @@ public class ShoppingListActivity extends AppCompatActivity {
     /**
      * saves all elements in array to a string with a line breaker
      */
-    private void prepareToSave(){
+    private void prepareToSave() {
 
         listName = getString(R.string.shopping_list_baseline) + date;
 
         String temp = "";
-        for (String s: shopItems) {
+        for (String s : shopItems) {
 
             temp = s + "\n" + temp;
         }
@@ -188,10 +188,10 @@ public class ShoppingListActivity extends AppCompatActivity {
     /**
      * creates the obj of DataManager class to save the list
      */
-    private void createSaveObj(){
+    private void createSaveObj() {
 
         DataManager shopList = new DataManager(ShoppingListActivity.this,
-                listName, listItems,true, checkIfSame);
+                listName, listItems, true, checkIfSame);
         finish();
 
     }
@@ -199,7 +199,7 @@ public class ShoppingListActivity extends AppCompatActivity {
     /**
      * creates the obj of DataManager class to delete the list
      */
-    private void createDeleteObj(){
+    private void createDeleteObj() {
 
         DataManager deleteNote = new DataManager(ShoppingListActivity.this,
                 listName, listItems, false, checkIfSame);
@@ -226,11 +226,11 @@ public class ShoppingListActivity extends AppCompatActivity {
 
     }
 
-    private boolean checkForDoubles(String toAdd){
+    private boolean checkForDoubles(String toAdd) {
 
-        for (String s: shopItems) {
+        for (String s : shopItems) {
 
-            if (s.equals(toAdd)){
+            if (s.equals(toAdd)) {
                 return false;
             }
         }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/notepad_background">
 
     <!-- Title -->
@@ -10,23 +10,23 @@
         android:id="@+id/title_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_alignParentTop="true"
-        android:background="@drawable/background_dimmer">
+        android:background="@drawable/background_dimmer"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/fixed_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/shopping_list_baseline"
             android:fontFamily="@font/annie_use_your_telescope"
-            android:textStyle="bold"
-            android:textSize="@dimen/title_size"
-            android:textAlignment="center"
-            android:paddingBottom="@dimen/margin_5"
             android:paddingLeft="@dimen/margin_5"
-            android:textColor="@color/black"></TextView>
+            android:paddingBottom="@dimen/margin_5"
+            android:text="@string/shopping_list_baseline"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/title_size"
+            android:textStyle="bold"></TextView>
 
     </LinearLayout>
 
@@ -36,8 +36,8 @@
         android:id="@+id/shop_list_items"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/background_dimmer"
-        android:layout_below="@+id/title_layout"/>
+        android:layout_below="@+id/title_layout"
+        android:background="@drawable/background_dimmer" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/erase_floating"
@@ -49,7 +49,7 @@
         android:layout_marginBottom="@dimen/margin_5"
         android:backgroundTint="@color/white"
         android:src="@drawable/ic_baseline_delete_24"
-        app:fabSize="mini"/>
+        app:fabSize="mini" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/save_floating"
@@ -61,18 +61,18 @@
         android:layout_marginBottom="@dimen/margin_5"
         android:backgroundTint="@color/white"
         android:src="@drawable/ic_baseline_save_24"
-        app:fabSize="mini"/>
+        app:fabSize="mini" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/multi_function_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/white"
-        android:src="@drawable/ic_baseline_add_circle_outline_24"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="@dimen/margin_15"
         android:layout_marginBottom="@dimen/margin_65"
-        android:layout_marginRight="@dimen/margin_15"></com.google.android.material.floatingactionbutton.FloatingActionButton>
+        android:backgroundTint="@color/white"
+        android:src="@drawable/ic_baseline_add_circle_outline_24"></com.google.android.material.floatingactionbutton.FloatingActionButton>
 
 
     <!-- Button Container -->
@@ -89,27 +89,25 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_5"
             android:layout_marginRight="@dimen/margin_5"
+            android:layout_weight="1"
             android:background="@drawable/background_dimmer"
             android:fontFamily="@font/annie_use_your_telescope"
             android:hint="@string/edit_body_hint"
-            android:maxLines="1"
             android:inputType="text"
+            android:maxLines="1"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size"
-            android:layout_weight="1"
             android:textStyle="bold"></EditText>
 
         <Button
             android:id="@+id/btn_add_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add"
             android:backgroundTint="@color/black"
-            android:fontFamily="@font/annie_use_your_telescope" />
+            android:fontFamily="@font/annie_use_your_telescope"
+            android:text="Add" />
 
     </LinearLayout>
-
-
 
 
 </RelativeLayout>

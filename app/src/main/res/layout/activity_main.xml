@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="@drawable/notepad_background">
+    android:background="@drawable/notepad_background"
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/tv_title"
@@ -32,12 +32,12 @@
         android:id="@+id/options_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_marginBottom="@dimen/margin_15"
+        android:layout_alignParentBottom="true"
         android:layout_marginRight="@dimen/margin_15"
-        android:src="@drawable/ic_baseline_add_circle_outline_24"
-        android:backgroundTint="@color/white" />
+        android:layout_marginBottom="@dimen/margin_15"
+        android:backgroundTint="@color/white"
+        android:src="@drawable/ic_baseline_add_circle_outline_24" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/option_one"
@@ -62,7 +62,6 @@
         android:backgroundTint="@color/white"
         android:src="@drawable/ic_baseline_book_24"
         app:fabSize="mini" />
-
 
 
 </RelativeLayout>
