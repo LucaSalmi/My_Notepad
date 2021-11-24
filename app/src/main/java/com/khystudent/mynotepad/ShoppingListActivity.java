@@ -7,10 +7,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.text.InputType;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.StrikethroughSpan;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -44,7 +48,10 @@ public class ShoppingListActivity extends AppCompatActivity {
 
     ListView itemsList;
 
+    SharedPreferences sp;
+
     ArrayList<String> shopItems = new ArrayList<>();
+    ArrayList<Integer> positionMemory = new ArrayList<>();
 
     ArrayAdapter<String> adapter;
 
@@ -63,8 +70,11 @@ public class ShoppingListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping_list_two);
 
+        sp = getSharedPreferences("com.khystudent.mynotepad.MyPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+
         setFields();
-        setListeners();
+        setListeners(editor);
         onNoteLoad();
         setAdapter();
 
@@ -82,7 +92,7 @@ public class ShoppingListActivity extends AppCompatActivity {
 
     }
 
-    private void setListeners() {
+    private void setListeners(SharedPreferences.Editor editor) {
 
         itemsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -94,7 +104,13 @@ public class ShoppingListActivity extends AppCompatActivity {
 
                     text.setPaintFlags(text.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
 
-                }else text.setPaintFlags(text.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                }else{
+
+                    text.setPaintFlags(text.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                    shopItems.add(position, text.getText().toString());
+
+
+                }
 
             }
         });
