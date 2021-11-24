@@ -1,5 +1,7 @@
 package com.khystudent.mynotepad;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,6 +11,7 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -23,6 +26,8 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.awt.font.TextAttribute;
+import java.text.AttributedString;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -66,6 +71,7 @@ public class ShoppingListActivity extends AppCompatActivity {
     }
 
     private void setFields() {
+
         item = findViewById(R.id.et_new_item);
         add = findViewById(R.id.btn_add_item);
         itemsList = findViewById(R.id.shop_list_items);
@@ -82,8 +88,24 @@ public class ShoppingListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                shopItems.remove(position);
+                TextView text = (TextView) view;
+
+                if ((text.getPaintFlags() & Paint.STRIKE_THRU_TEXT_FLAG) > 0){
+
+                    text.setPaintFlags(text.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+
+                }else text.setPaintFlags(text.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+
+            }
+        });
+
+        itemsList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                shopItems.remove(shopItems.get(i));
                 adapter.notifyDataSetChanged();
+                return false;
             }
         });
 
@@ -120,8 +142,11 @@ public class ShoppingListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!isFABOpen) {
+
                     showMenu();
+
                 } else {
+
                     closeMenu();
                 }
             }
